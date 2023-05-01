@@ -20,7 +20,11 @@ const NewSupplier = () => {
             "email": email,
             "gstin": gstin
         }
-        axios.post("http://192.168.4.9:8011/inventory/supplier/", data).then(res => {
+        axios.post("http://192.168.0.7:8011/inventory/supplier/", data,{
+            headers:{
+                "Authorization":"Token "+token
+            }
+        }).then(res => {
             console.log(res.data);
         })
     }

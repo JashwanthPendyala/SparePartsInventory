@@ -4,10 +4,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
-import NewSupplier from './components/Supplier/NewSupplier';
+
 import SupplierList from './components/Supplier/SupplierList';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NewStock from './components/Purchase/NewStock';
+import NewSale from './components/Sales/Sales';
+import NewSupplier from './components/Supplier/NewSupplier';
 
 
 function App() {
@@ -58,9 +61,9 @@ function App() {
           <Route path='/' element={<Login />} />
           <Route path='/newSupplier' element={<NewSupplier />} />
           <Route path='/supplierList' element={<SupplierList />} />
-
+          <Route path='/newStock' element={<NewStock/>}/>
+          <Route path='/newSale'element={<NewSale/>}/>
         </Routes>
-
       </BrowserRouter>
       <ToastContainer />
     </div>

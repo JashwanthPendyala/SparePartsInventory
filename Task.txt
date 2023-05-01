@@ -1,0 +1,2 @@
+1. Login authuentication
+2.Nav bar setting
