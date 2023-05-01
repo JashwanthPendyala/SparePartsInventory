@@ -1,2 +1,3 @@
-1. Login authuentication
-2.Nav bar setting
+edit delete
+Sales price qty auto updation
+Links on list pages --Top right button

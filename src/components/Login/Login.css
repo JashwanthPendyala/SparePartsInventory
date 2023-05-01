@@ -17,9 +17,9 @@
   
   
   @media only screen and (min-width: 768px) {
-    .left-banner-img{
+    /* .left-banner-img{
       height: 690px!important;
-    }
+    } */
     
     }
 
@@ -29,23 +29,36 @@
         }
     }
   
-    .left-banner-title{
+    /* .left-banner-title{
       position: absolute;
       z-index: 2;
       left: 1%;
       bottom: 2%;
-    }
-  .left-banner-img{
-    height: inherit;
+    } */
+  /* .left-banner-img{
+    height: 100%;
     position:'absolute';
     z-index:1;
+  } */
+  .left-banner-img{
+    background-image: url("../Images/Mask Group 1.svg");
+   object-fit: cover;
   }
-  .vehicles{
+.logo{
+  position: relative;
+  width: 100%;
+  top: 35%;
+
+}
+  .overflow-container{
+    overflow-y: hidden;
+  }
+  /* .vehicles{
     position: absolute;
     z-index: 2;
     left:1%;
     bottom: 1%;
-  }
+  } */
   
   .full-height {
     height: 100%;
@@ -70,7 +83,8 @@
   
   
   .title {
-    font-size: 20px;
+    font-size: 25px;
+    font-weight: bold;
   }
   
   .sign-in,.sign-up{
@@ -86,7 +100,8 @@
   }
   .login-label{
     
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: bold;
    
   }
   .submit-login{

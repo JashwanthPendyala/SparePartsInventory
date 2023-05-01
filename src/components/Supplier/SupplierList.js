@@ -16,7 +16,7 @@ const SupplierList = () => {
     const [supplierList, setSupplierList] = useState([])
 
     const getSupplierList = () => {
-        axios.get("http://192.168.4.9:8011/inventory/supplier/").then(res => {
+        axios.get("http://192.168.0.7:8011/inventory/supplier/").then(res => {
             setSupplierList(res.data);
         })
     }
@@ -42,7 +42,7 @@ const SupplierList = () => {
                     <p>Supplier List</p>
                 </div>
                 <div className="addStockBtn">
-                    <Button className="addNewStockBtn fs-5">Add New Stock</Button>
+                    <Button className="addNewStockBtn fs-5">Add New Supplier</Button>
                 </div>
             </div>
             <InputGroup className="mb-3 mt-4">

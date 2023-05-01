@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="mask" width="1920" height="1080" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <filter id="Path_2" x="-256.206" y="-770.603" width="2149.206" height="2150.206" filterUnits="userSpaceOnUse">
+      <feOffset dy="10" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" clip-path="url(#clip-path)">
+    <g id="bg">
+      <g id="Rectangle_12" data-name="Rectangle 12" fill="#ff9100" stroke="#707070" stroke-width="1">
+        <rect width="1920" height="1080" stroke="none"/>
+        <rect x="0.5" y="0.5" width="1919" height="1079" fill="none"/>
+      </g>
+      <g id="Group_2" data-name="Group 2">
+        <g id="Path_1" data-name="Path 1" transform="translate(413.365 521.852) rotate(2)" fill="rgba(255,255,255,0.57)" opacity="0.28">
+          <path d="M 1474.21240234375 926.5748291015625 L -360.1976623535156 682.68359375 L 0.2386118173599243 0.6182887554168701 L 1613.632446289062 584.671630859375 L 1474.21240234375 926.5748291015625 Z" stroke="none"/>
+          <path d="M 0.4776611328125 1.2364501953125 L -359.4200439453125 682.28271484375 L 1473.895263671875 926.0284423828125 L 1612.973022460938 584.964599609375 L 0.4776611328125 1.2364501953125 M 0 0 L 1614.2919921875 584.3785400390625 L 1474.529418945312 927.1215209960938 L -360.97509765625 683.0847778320312 L 0 0 Z" stroke="none" fill="#707070"/>
+        </g>
+        <path id="Path_3" data-name="Path 3" d="M0,0,1614.292,584.378,1474.529,927.122l-1835.5-244.037Z" transform="matrix(-0.946, -0.326, 0.326, -0.946, 1546.597, 1346.825)" fill="rgba(255,255,255,0.57)" opacity="0.28"/>
+        <path id="Path_4" data-name="Path 4" d="M143.137,45.324,1920,0V946H0Z" transform="translate(830.636 -54) rotate(40)" fill="rgba(152,152,152,0.57)" opacity="0.43"/>
+        <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_2)">
+          <path id="Path_2-2" data-name="Path 2" d="M0,0H2399.541l-24.43,434.84L0,614.439Z" transform="translate(1884 -336.13) rotate(135)" fill="rgba(255,255,255,0.57)" opacity="0.12"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

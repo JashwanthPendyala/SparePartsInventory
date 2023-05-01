@@ -25,7 +25,12 @@ const NewSupplier = () => {
                 "Authorization":"Token "+token
             }
         }).then(res => {
-            console.log(res.data);
+            console.log(res.status);
+            if(res.status === 201){
+                console.log("status done");
+                navigate("/supplierList")
+            }
+
         })
     }
     useEffect(()=>{

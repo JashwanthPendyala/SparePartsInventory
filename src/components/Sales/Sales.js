@@ -1,96 +1,221 @@
-import React, { useEffect, useState } from 'react'
-import { Button, ButtonGroup, Col, Container, Form, Row } from 'react-bootstrap'
-import './Sales.css'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Container,
+  Form,
+  Row,
+} from "react-bootstrap";
+import "./Sales.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const NewSale = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [gstin, setGstin] = useState("");
-    const [phone, setPhone] = useState();
-    const [address, setAddress] = useState("");
-    const token = localStorage.getItem("token");
-    const navigate = useNavigate();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            "name": name,
-            "phone": phone,
-            "address": address,
-            "email": email,
-            "gstin": gstin
-        }
-        axios.post("http://192.168.4.9:8011/inventory/supplier/", data).then(res => {
-            console.log(res.data);
-        })
-    }
-    // useEffect(()=>{
-    //     if(token === ""){
-    //         navigate("/")
-    //     }
-    // })
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gstin, setGstin] = useState("");
+  const [phone, setPhone] = useState();
+  const [qty, setQty] = useState("");
+  const [bill, setBill] = useState("");
+  const [address, setAddress] = useState("");
+  const [stock, setStock] = useState("");
+  const [buy, setBuy] = useState("");
+  const [price, setPrice] = useState("");
+  const [stockList, setStockList] = useState([]);
+  const token = localStorage.getItem("token");
+  const [billNO, setBillNo] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const saleBill = {
+      name: name,
+      phone: phone,
+      address: address,
+      email: email,
+      gstin: gstin,
+    };
+    axios
+      .post("http://192.168.0.7:8011/transactions/saleBill/", saleBill, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.billno);
+        setBillNo(res.data.billno);
+      });
 
+    const saleItem = {
+      quantity: qty,
+      perprice: price,
+      totalprice: bill,
+      billno: billNO,
+      stock: buy,
+    };
+    console.log(saleItem);
+    axios
+      .post("http://192.168.0.7:8011/transactions/saleitem/", saleItem, {
+        headers: {
+          Authorization: "Token " + localStorage.getItem("token"),
+        },
+      })
+      .then((res) => console.log(res.data));
+  };
 
+  const getStockPrice = (id) => {
+    axios.get("http://192.168.0.7:8011/inventory/stock/" + id).then((res) => {
+      console.log(res.data);
+      setPrice(res.data.price);
+    });
+  };
 
-    return (
-        <Container>
+  const calBill = (qty) => {
+    console.log(buy, " buy");
+    setBill(price * qty);
+  };
+  useEffect(() => {
+    //   if(token === ""){
+    //       navigate("/")
+    //   }
+    axios.get("http://192.168.0.7:8011/inventory/stock/").then((res) => {
+      setStockList(res.data);
+      console.log(res.data);
+    });
+  }, []);
 
-            <div>
-                <div className="supplier-title">
-                    <p>New Supplier{token}</p>
-                </div>
-                <hr />
-                <div className="supplier-sub-title">
-                    <p>SUPPLIER DETAILS</p>
-                </div>
-                <Form className='justify-content-md-center'>
-                    <Row className="mb-3">
-                        <Col sm={12} md={6}>
-                            <Form.Label>Supplier Name</Form.Label>
-                            <Form.Control type="text" className='supplier-input' onChange={(e) => setName(e.target.value)} />
-                        </Col>
+  return (
+    <Container>
+      <div>
+        <div className="supplier-title">
+          <p>New Sale{token}</p>
+        </div>
+        <hr />
+        <div className="supplier-sub-title">
+          <p>Customer DETAILS</p>
+        </div>
+        <Form className="justify-content-md-center">
+          <Row className="mb-3">
+            <Col sm={12} md={6}>
+              <Form.Label>Customer Name</Form.Label>
+              <Form.Control
+                type="text"
+                className="supplier-input"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Col>
 
-                        <Col sm={12} md={6}>
-                            <Form.Label>Phone</Form.Label>
-                            <Form.Control type="text" className='supplier-input' onChange={(e) => setPhone(e.target.value)} />
-                        </Col>
-                    </Row>
-                    <Row className="mb-3">
-                        <Col sm={12} md={6}>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" className='supplier-input' onChange={(e) => setEmail(e.target.value)} />
-                        </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="text"
+                className="supplier-input"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col sm={12} md={6}>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                className="supplier-input"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Col>
 
-                        <Col sm={12} md={6}>
-                            <Form.Label>GSTIN No.</Form.Label>
-                            <Form.Control type="text" className='supplier-input' onChange={(e) => setGstin(e.target.value)} />
-                        </Col>
-                    </Row>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control as="textarea" rows={3} className='supplier-input' onChange={(e) => setAddress(e.target.value)} />
-                    </Form.Group>
+            <Col sm={12} md={6}>
+              <Form.Label>GSTIN No.</Form.Label>
+              <Form.Control
+                type="text"
+                className="supplier-input"
+                onChange={(e) => setGstin(e.target.value)}
+              />
+            </Col>
+          </Row>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              className="supplier-input"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </Form.Group>
 
-                    <div className='d-flex justify-content-center'>
-                        <div className='me-4'>
-                            <Button size="lg" className='cancel-supplier-btn'>
-                                Cancel
-                            </Button>
-                        </div>
-                        <div className='ms-4'>
-                            <Button size="lg" className='add-supplier-btn' onClick={(e) => handleSubmit(e)}>Add Supplier</Button>
-                        </div>
-                    </div>
-                </Form>
-                <div className="supplier-sub-title">
-                    <p>SUPPLIER DETAILS</p>
-                </div>
+          <div className="supplier-sub-title">
+            <p>Product DETAILS</p>
+          </div>
+          <Row>
+            <Col>
+              <Form.Label>Stock</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => {
+                  setStock(e.target.selectedIndex.text);
+                  setBuy(e.target.value);
+                  getStockPrice(e.target.value);
+                }}
+              >
+                {stockList.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Col>
+            <Col>
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="text"
+                value={price}
+                aria-label="Disabled input example"
+                disabled
+                readOnly
+              />
+            </Col>
+            <Col>
+              <Form.Label>Quantity</Form.Label>
+              <Form.Control
+                type="number"
+                value={qty}
+                onChange={(e) => {
+                  setQty(e.target.value);
+                  calBill(e.target.value);
+                }}
+              />
+            </Col>
+            <Col>
+              <Form.Label>Bill</Form.Label>
+              <Form.Control
+                type="text"
+                value={bill}
+                aria-label="Disabled input example"
+                disabled
+                readOnly
+              />
+            </Col>
+          </Row>
+
+          <div className="d-flex justify-content-center mt-4">
+            <div className="me-4">
+              <Button size="lg" className="cancel-supplier-btn">
+                Cancel
+              </Button>
             </div>
+            <div className="ms-4">
+              <Button
+                size="lg"
+                className="add-supplier-btn"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Add Supplier
+              </Button>
+            </div>
+          </div>
+        </Form>
+      </div>
+    </Container>
+  );
+};
 
-
-
-        </Container>
-    )
-}
-
-export default NewSale
+export default NewSale;
