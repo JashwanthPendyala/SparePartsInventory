@@ -1,3 +1,6 @@
 edit delete
 Sales price qty auto updation
 Links on list pages --Top right button
+
+
+NOTIFY AFTER ADDING SUPPLIER

@@ -10,6 +10,7 @@ import {
 import "./Sales.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import TopNav from "../Navbar/TopNav";
 const NewSale = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const NewSale = () => {
       gstin: gstin,
     };
     axios
-      .post("http://192.168.0.7:8011/transactions/saleBill/", saleBill, {
+      .post("http://192.168.7.148:8011/transactions/saleBill/", saleBill, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -52,9 +53,9 @@ const NewSale = () => {
       billno: billNO,
       stock: buy,
     };
-    console.log(saleItem);
+    console.log(saleItem," Sale Item With Bill No");
     axios
-      .post("http://192.168.0.7:8011/transactions/saleitem/", saleItem, {
+      .post("http://192.168.7.148:8011/transactions/saleitem/", saleItem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -63,7 +64,7 @@ const NewSale = () => {
   };
 
   const getStockPrice = (id) => {
-    axios.get("http://192.168.0.7:8011/inventory/stock/" + id).then((res) => {
+    axios.get("http://192.168.7.148:8011/inventory/stock/" + id).then((res) => {
       console.log(res.data);
       setPrice(res.data.price);
     });
@@ -77,17 +78,18 @@ const NewSale = () => {
     //   if(token === ""){
     //       navigate("/")
     //   }
-    axios.get("http://192.168.0.7:8011/inventory/stock/").then((res) => {
+    axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
       setStockList(res.data);
       console.log(res.data);
     });
   }, []);
 
   return (
-    <Container>
-      <div>
+    <Container fluid>
+    <TopNav />
+    <div className="mt-3">
         <div className="supplier-title">
-          <p>New Sale{token}</p>
+          <p>New Sale</p>
         </div>
         <hr />
         <div className="supplier-sub-title">
@@ -185,7 +187,7 @@ const NewSale = () => {
               />
             </Col>
             <Col>
-              <Form.Label>Bill</Form.Label>
+              <Form.Label>Total</Form.Label>
               <Form.Control
                 type="text"
                 value={bill}
@@ -208,7 +210,7 @@ const NewSale = () => {
                 className="add-supplier-btn"
                 onClick={(e) => handleSubmit(e)}
               >
-                Add Supplier
+                Add Sale
               </Button>
             </div>
           </div>

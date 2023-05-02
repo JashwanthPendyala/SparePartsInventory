@@ -13,7 +13,11 @@ import NewSupplier from "./components/Supplier/NewSupplier";
 import InventoryList from "./components/Purchase/InventoryList";
 import SalesList from "./components/Sales/SalesList";
 import Signup from "./components/Signup/Signup";
-import SideNav from "./components/SideNav/SideNav";
+import TopNav from "./components/Navbar/TopNav";
+import ContactUs from "./components/ContactUs/ContactUs";
+import Feedback from "./components/Feedback/Feedback";
+import Home from "./components/Dashboard/Home";
+import EditStock from "./components/Purchase/EditStock";
 
 function App() {
   // const [token, setToken] = useState("")
@@ -67,8 +71,12 @@ function App() {
           <Route path="/newSale" element={<NewSale />} />
           <Route path="/inventoryList" element={<InventoryList />} />
           <Route path="/salesList" element={<SalesList/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/sidenav" element={<SideNav/>}/>
+          <Route path="/signup" element={<Signup/>}/>         
+          <Route path="/topnav" element={<TopNav/>}/>
+          <Route path="/contactus" element={<ContactUs/>}/>
+          <Route path="/feedback" element={<Feedback/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/edit/:id" element={<EditStock/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer />

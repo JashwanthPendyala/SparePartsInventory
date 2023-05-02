@@ -12,13 +12,14 @@ import {
   Row,
   Table,
 } from "react-bootstrap";
+import TopNav from "../Navbar/TopNav";
 
 const SalesList = () => {
   const [salesList, setSalesList] = useState([]);
 
   const getSalesList = () => {
     axios
-      .get("http://192.168.0.7:8011/transactions/saleitem/", {
+      .get("http://192.168.7.148:8011/transactions/saleitem/", {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -42,8 +43,9 @@ const SalesList = () => {
     //   });
   }, []);
   return (
-    <Container>
-      <div className="supplier-list-title">Sales List</div>
+    <Container fluid>
+      <TopNav/>
+      <div className="mt-3 supplier-list-title">Sales List</div>
       <hr />
       <div className="d-flex justify-content-between">
         <div className="supplier-list-subtitle">
@@ -88,7 +90,7 @@ const SalesList = () => {
               <td>{map.quantity}</td>
               <td>{map.perprice}</td>
               <td>{map.totalprice}</td>
-              <td>{map.stock}</td>
+              <td>{map.stock_name}</td>
               <td>
                 <Button onClick={(e) => handleEdit(e, map.id)}>Edit</Button>
               </td>

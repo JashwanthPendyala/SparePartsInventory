@@ -2,10 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import $ from 'jquery'
 //jquery 
-import "/node_modules/jquery/dist/jquery.min.js"; 
+import "/node_modules/jquery/dist/jquery.min.js";
 //Datatable Modules 
-import "/node_modules/datatables.net-dt/js/dataTables.dataTables"; 
-import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css"; 
+import "/node_modules/datatables.net-dt/js/dataTables.dataTables";
+import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import {
   Button,
@@ -18,12 +18,16 @@ import {
   Row,
   Table,
 } from "react-bootstrap";
+import TopNav from "../Navbar/TopNav";
+import { useNavigate } from "react-router-dom";
 
 const InventoryList = () => {
+
   const [inventoryList, setInventoryList] = useState([]);
   const [supplierName, setSupplierName] = useState("");
-  const getInventoryList = async() => {
-    await axios.get("http://192.168.0.7:8011/inventory/stock/").then((res) => {
+  const navigate = useNavigate();
+  const getInventoryList = async () => {
+    await axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
       setInventoryList(res.data);
       console.log(res.data);
     });
@@ -32,23 +36,30 @@ const InventoryList = () => {
 
   const handleEdit = (e, id) => {
     e.preventDefault();
+    alert("Hii")
+    navigate('/edit/' + id)
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
     alert(id);
+    axios.delete("http://192.168.7.148:8011/inventory/stock/"+id+"/").then(res=>{
+      console.log(res.data);
+      window.location.reload();
+    })
   };
-  const getDataTable = ()=>{
+  const getDataTable = () => {
     $(document).ready(function () {
       $("#example").DataTable();
     });
   }
   useEffect(() => {
     getInventoryList();
-      
+
   }, []);
   return (
-    <Container>
-      <div className="supplier-list-title">Inventory List</div>
+    <Container fluid>
+      <TopNav />
+      <div className="mt-3 supplier-list-title">Inventory List</div>
       <hr />
       <div className="d-flex justify-content-between">
         <div className="supplier-list-subtitle">
@@ -65,7 +76,7 @@ const InventoryList = () => {
         </InputGroup.Text>
       </InputGroup>
 
-      <table  id="example">
+      <table id="example">
         <thead
           style={{
             borderStyle: "none",
@@ -75,10 +86,10 @@ const InventoryList = () => {
         >
           <tr>
             <th>#</th>
-            <th>Name</th>
+            <th className="text-center">Name</th>
             <th>Pice</th>
             <th>Quantity</th>
-            <th>Supplier</th>
+            <th className="text-center">Supplier</th>
             <th className="text-center">
               Edit
             </th>
@@ -90,7 +101,7 @@ const InventoryList = () => {
         <tbody>
           {inventoryList.map((map, i) => (
             <tr key={i}>
-              <td>{map.id}</td>
+              <td>{i + 1}</td>
               <td>{map.name}</td>
               <td>{map.price}</td>
               <td>{map.quantity}</td>

@@ -10,6 +10,7 @@ import {
 import "./Stock.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import TopNav from "../Navbar/TopNav";
 const NewStock = () => {
   const [name, setName] = useState("");
   const [qty, setQty] = useState("");
@@ -28,7 +29,11 @@ const NewStock = () => {
       supplier: supplier,
       buy: buy
     };
-    axios.post("http://192.168.0.7:8011/inventory/stock/", data).then((res) => {
+    axios.post("http://192.168.7.148:8011/inventory/stock/", data,{
+      headers:{
+        "Authorization":"Token "+localStorage.getItem("token")
+      }
+    }).then((res) => {
       console.log(res.data);
     });
 
@@ -36,7 +41,7 @@ const NewStock = () => {
   };
   useEffect(() => {
     axios
-      .get("http://192.168.0.7:8011/inventory/supplier/")
+      .get("http://192.168.7.148:8011/inventory/supplier/")
       .then((res) => {setSupplierList(res.data)
     console.log(res.data)});
     // if(token === ""){
@@ -45,10 +50,11 @@ const NewStock = () => {
   }, []);
 
   return (
-    <Container>
-      <div>
+    <Container fluid>
+      <TopNav/>
+      <div className="mt-3">
         <div className="supplier-title">
-          <p>New Stock{token}</p>
+          <p>New Stock</p>
         </div>
         <hr />
         <div className="supplier-sub-title">
