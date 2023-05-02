@@ -11,7 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import NewStock from './components/Purchase/NewStock';
 import NewSale from './components/Sales/Sales';
 import NewSupplier from './components/Supplier/NewSupplier';
-
+import Contactus from './components/contactus/contactus';
+import Feedback from './components/feedback/feedback';
 
 function App() {
   // const [token, setToken] = useState("")
@@ -63,6 +64,8 @@ function App() {
           <Route path='/supplierList' element={<SupplierList />} />
           <Route path='/newStock' element={<NewStock/>}/>
           <Route path='/newSale'element={<NewSale/>}/>
+          <Route path='/contactus'element={<Contactus/>}/>
+          <Route path='/feedback'element={<Feedback/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer />

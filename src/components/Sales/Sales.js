@@ -20,7 +20,7 @@ const NewSale = () => {
             "email": email,
             "gstin": gstin
         }
-        axios.post("http://192.168.4.9:8011/inventory/supplier/", data).then(res => {
+        axios.post("http://192.168.7.241:8011/inventory/supplier/", data).then(res => {
             console.log(res.data);
         })
     }

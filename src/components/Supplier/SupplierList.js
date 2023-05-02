@@ -16,7 +16,7 @@ const SupplierList = () => {
     const [supplierList, setSupplierList] = useState([])
 
     const getSupplierList = () => {
-        axios.get("http://192.168.4.9:8011/inventory/supplier/").then(res => {
+        axios.get("http://192.168.7.241:8011/inventory/supplier/").then(res => {
             setSupplierList(res.data);
         })
     }
