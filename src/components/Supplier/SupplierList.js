@@ -13,10 +13,11 @@ import {
 } from "react-bootstrap";
 import TopNav from "../Navbar/TopNav";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SupplierList = () => {
     const [supplierList, setSupplierList] = useState([])
-
+    const navigate = useNavigate();
     const getSupplierList = () => {
         axios.get("http://192.168.7.148:8011/inventory/supplier/").then(res => {
             setSupplierList(res.data);
@@ -24,12 +25,18 @@ const SupplierList = () => {
     }
     const handleEdit = (e, id) => {
         e.preventDefault();
+        alert("Hii")
+        navigate('/sedit/' + id)
+      };
 
-    }
     const handleDelete = (e, id) => {
         e.preventDefault();
-        alert(id)
-    }
+        alert(id);
+        axios.delete("http://192.168.7.148:8011/inventory/supplier/"+id+"/").then(res=>{
+            console.log(res.data);
+            window.location.reload();
+          })
+    };
     useEffect(() => {
         getSupplierList();
     }, [])
