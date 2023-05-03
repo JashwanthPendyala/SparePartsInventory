@@ -18,6 +18,7 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import Feedback from "./components/Feedback/Feedback";
 import Home from "./components/Dashboard/Home";
 import EditStock from "./components/Purchase/EditStock";
+import Changepassword from "./components/ChangePassword/ChangePassword";
 
 function App() {
   // const [token, setToken] = useState("")
@@ -77,6 +78,7 @@ function App() {
           <Route path="/feedback" element={<Feedback/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/edit/:id" element={<EditStock/>}/>
+          <Route path="/changepassword" element={<Changepassword/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer />
