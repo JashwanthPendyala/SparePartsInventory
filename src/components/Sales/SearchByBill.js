@@ -26,17 +26,21 @@ const SearchByBill = () => {
     const [visibility, setVisibility] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://192.168.7.148:8011/transactions/salebilldetails/", {
+        axios.post("http://192.168.0.8:8011/transactions/salebilldetails/", {
             "billno": billno
         }, {
             headers: {
                 "Authorization": "Token " + token
             }
         }).then((res) => {
-            console.log(res.data[0]);
-            setData(res.data[0])
-            console.log(res.data[1]);
-            console.log(res.data);
+           
+             setData(res.data[0])
+        
+            // console.log(res.data);
+            // setCGST(res.data.cgst)
+            // setVisibility(true)
+            // setTotal(res.data.total)
+            // setSGST(res.data.sgst)
             setCGST(res.data[1])
             setSGST(res.data[2])
             setGrandTotal(res.data[3])

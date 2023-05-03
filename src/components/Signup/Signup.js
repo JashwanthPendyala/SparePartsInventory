@@ -179,7 +179,7 @@ const Signup = () => {
       password1: password,
       password2: confirmPassword,
     };
-    axios.post("http://192.168.0.7:8011/user/signup/", data).then((res) => {
+    axios.post("http://192.168.0.8:8011/user/signup/", data).then((res) => {
       console.log(res.status);
       if (res.status === 200) {
         console.log("status done");

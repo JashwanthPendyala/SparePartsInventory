@@ -25,31 +25,31 @@ const NewSale = () => {
   const [stockList, setStockList] = useState([]);
   const token = localStorage.getItem("token");
   const [billNO, setBillNo] = useState("");
-  const saleBill = {
-    name: "",
-    phone: "",
-    address: "",
-    email: "",
-    gstin: "",
-  };
+  // const saleBill = {
+  //   name: "",
+  //   phone: "",
+  //   address: "",
+  //   email: "",
+  //   gstin: "",
+  // };
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const saleBill = {
-    //   name: name,
-    //   phone: phone,
-    //   address: address,
-    //   email: email,
-    //   gstin: gstin,
-    // };
+    const saleBill = {
+      name: name,
+      phone: phone,
+      address: address,
+      email: email,
+      gstin: gstin,
+    };
     axios
-      .post("http://192.168.7.148:8011/transactions/saleBill/", saleBill, {
+      .post("http://192.168.0.8:8011/transactions/saleBill/", saleBill, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token")
         },
       })
       .then((res) => {
-        console.log(res.data.billno);
+        console.log(res.data.billno," BILL NO");
         setBillNo(res.data.billno);
       });
 
@@ -62,7 +62,7 @@ const NewSale = () => {
     };
     console.log(saleItem, " Sale Item With Bill No");
     axios
-      .post("http://192.168.7.148:8011/transactions/saleitem/", saleItem, {
+      .post("http://192.168.0.8:8011/transactions/saleitem/", saleItem, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -71,7 +71,7 @@ const NewSale = () => {
   };
 
   const getStockPrice = (id) => {
-    axios.get("http://192.168.7.148:8011/inventory/stock/" + id).then((res) => {
+    axios.get("http://192.168.0.8:8011/inventory/stock/" + id).then((res) => {
       console.log(res.data);
       setPrice(res.data.price);
     });
@@ -85,7 +85,7 @@ const NewSale = () => {
       if(token === ""){
           navigate("/")
       }
-    axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
+    axios.get("http://192.168.0.8:8011/inventory/stock/").then((res) => {
       setStockList(res.data);
       console.log(res.data);
     });

@@ -4,6 +4,7 @@ import './ContactUs.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import TopNav from '../Navbar/TopNav'
+import { toast } from 'react-toastify'
 const ContactUs = () => {
 
     const [email, setEmail] = useState("");
@@ -20,12 +21,17 @@ const ContactUs = () => {
             "message": message,
 
         }
-        axios.post("http://192.168.7.148:8011/user/contact/", data, {
+        axios.post("http://192.168.0.8:8011/user/contact/", data, {
             headers: {
                 "Authorization": "Token " + token
             }
         }).then(res => {
             console.log(res.data);
+            
+            toast.success("Request Submitted Successfully...!",{
+                position: "top-right",
+                theme: "colored"
+            })
         })
     }
     useEffect(() => {
@@ -36,7 +42,7 @@ const ContactUs = () => {
     return (
         <Container fluid>
             <TopNav />
-            <div><div className="mt-3 Contact-title">
+            <Container><div className="mt-3 Contact-title">
                 <p>Contact us</p>
             </div>
                 <hr />
@@ -70,7 +76,7 @@ const ContactUs = () => {
                         </div>
                     </div>
 
-                </Form> </div>
+                </Form> </Container>
 
 
 

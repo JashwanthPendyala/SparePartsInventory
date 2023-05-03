@@ -11,6 +11,7 @@ import "./Stock.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
+import { toast } from "react-toastify";
 const EditStock = () => {
     const [name, setName] = useState("");
     const [qty, setQty] = useState("");
@@ -32,27 +33,31 @@ const EditStock = () => {
         e.preventDefault();
 
         console.log(data);
-        axios.patch("http://192.168.7.148:8011/inventory/stock/" + id + "/", data, {
+        axios.patch("http://192.168.0.8:8011/inventory/stock/" + id + "/", data, {
             headers: {
                 "Authorization": "Token " + localStorage.getItem("token")
             }
         }).then((res) => {
             console.log(res.data)
             //Toastify
-            // navigate("/inventoryList")
+            toast.success("Updated Successfully..!",{
+                position: "top-right",
+            theme: "colored",
+            })
+            navigate("/inventoryList")
         });
 
 
     };
     useEffect(() => {
         axios
-            .get("http://192.168.7.148:8011/inventory/supplier/")
+            .get("http://192.168.0.8:8011/inventory/supplier/")
             .then((res) => {
                 setSupplierList(res.data)
                 console.log(res.data)
             });
 
-        axios.get("http://192.168.7.148:8011/inventory/stock/" + id).then(res => {
+        axios.get("http://192.168.0.8:8011/inventory/stock/" + id).then(res => {
             console.log(res.data);
             setData(res.data)
         })
@@ -64,6 +69,7 @@ const EditStock = () => {
     return (
         <Container fluid>
             <TopNav />
+            <Container>
             <div className="mt-3">
                 <div className="supplier-title">
                     <p>Edit Stock</p>
@@ -151,6 +157,7 @@ const EditStock = () => {
                     </div>
                 </Form>
             </div>
+            </Container>
         </Container>
     );
 };

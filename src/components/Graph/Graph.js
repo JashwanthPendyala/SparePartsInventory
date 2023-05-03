@@ -3,35 +3,60 @@ import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
 
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js';
+
+Chart.register(CategoryScale);
+
+// Now you can create your chart as usual
 
 
 const Graph = () => {
-    const [data, setData] = useState();
+    const [data, setData] = useState({
+        labels: [],
+        datasets: [
+          {
+            label: 'Quantity',
+            backgroundColor: 'rgba(75,192,192,1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: []
+          },
+          {
+            label: 'Price',
+            backgroundColor: 'rgba(255,99,132,1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: []
+          }
+        ]
+      });
+      
 
 
 
     useEffect(() => {
-        axios.get('http://192.168.3.48:8000/transactions/leastQty/')
+        axios.get('http://192.168.0.8:8011/transactions/recentstock/')
             .then(response => {
                 console.log(response.data);
                 setData({
-                    // labels: response.data.map(item => item.name),
-                    // datasets: [
-                    //     {
-                    //         label: 'Quantity',
-                    //         backgroundColor: 'rgba(75,192,192,1)',
-                    //         borderColor: 'rgba(0,0,0,1)',
-                    //         borderWidth: 2,
-                    //         data: response.data.map(item => item.quantity)
-                    //     },
-                    //     {
-                    //         label: 'Price',
-                    //         backgroundColor: 'rgba(255,99,132,1)',
-                    //         borderColor: 'rgba(0,0,0,1)',
-                    //         borderWidth: 2,
-                    //         data: response.data.map(item => item.price)
-                    //     }
-                    // ]
+                    labels: response.data.map(item => item.name),
+                    datasets: [
+                        {
+                            label: 'Quantity',
+                            backgroundColor: 'rgba(75,192,192,1)',
+                            borderColor: 'rgba(0,0,0,1)',
+                            borderWidth: 2,
+                            data: response.data.map(item => item.quantity)
+                        },
+                        {
+                            label: 'Price',
+                            backgroundColor: 'rgba(255,99,132,1)',
+                            borderColor: 'rgba(0,0,0,1)',
+                            borderWidth: 2,
+                            data: response.data.map(item => item.price)
+                        }
+                    ]
                 });
             })
             .catch(error => {
