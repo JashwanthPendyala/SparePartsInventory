@@ -36,7 +36,7 @@ const Login = () => {
         });
       } else {
         localStorage.setItem("token", res.data.token);
-        navigate("/newSupplier");
+        navigate("/newSale");
       }
     });
   };

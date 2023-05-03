@@ -27,7 +27,7 @@ const NewStock = () => {
       price: price,
       qty: qty,
       supplier: supplier,
-      buy: buy
+      supplier_id: buy
     };
     axios.post("http://192.168.7.148:8011/inventory/stock/", data,{
       headers:{

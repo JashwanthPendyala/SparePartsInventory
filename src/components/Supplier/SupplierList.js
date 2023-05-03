@@ -12,23 +12,35 @@ import {
     Table,
 } from "react-bootstrap";
 import TopNav from "../Navbar/TopNav";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+//jquery 
+import "/node_modules/jquery/dist/jquery.min.js";
+//Datatable Modules 
+import "/node_modules/datatables.net-dt/js/dataTables.dataTables";
+import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
+import $ from "jquery";
 
 const SupplierList = () => {
     const [supplierList, setSupplierList] = useState([])
-
-    const getSupplierList = () => {
-        axios.get("http://192.168.7.148:8011/inventory/supplier/").then(res => {
+    const navigate = useNavigate();
+    const getSupplierList = async () => {
+        await axios.get("http://192.168.7.148:8011/inventory/supplier/").then(res => {
             setSupplierList(res.data);
         })
+        getDataTable();
     }
     const handleEdit = (e, id) => {
         e.preventDefault();
-
+        navigate("/editSupplier/" + id)
     }
     const handleDelete = (e, id) => {
         e.preventDefault();
         alert(id)
+    }
+    const getDataTable = () => {
+        $(document).ready(function () {
+            $("#example").DataTable();
+        });
     }
     useEffect(() => {
         getSupplierList();
@@ -56,21 +68,26 @@ const SupplierList = () => {
                     <InputGroup.Text id="basic-addon2" className="searchSupplier">Search</InputGroup.Text>
                 </InputGroup>
 
-                <Table responsive="sm">
+                <table id="example">
                     <thead style={{ borderStyle: "none", backgroundColor: "#707070", color: "white" }}>
                         <tr>
                             <th>#</th>
                             <th>Supplier Name</th>
                             <th>Contact</th>
                             <th>GSTIN No</th>
-                            <th colSpan={2}>Actions</th>
+                            <th className="text-center">
+                                Edit
+                            </th>
+                            <th className="text-center">
+                                Delete
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             supplierList.map((map, i) =>
                                 <tr key={i}>
-                                    <td>{map.id}</td>
+                                    <td>{i+1}</td>
                                     <td>{map.name}</td>
                                     <td>{map.phone}</td>
                                     <td>{map.gstin}</td>
@@ -80,7 +97,7 @@ const SupplierList = () => {
                         }
 
                     </tbody>
-                </Table>
+                </table>
 
             </div>
 

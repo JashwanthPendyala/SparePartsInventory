@@ -13,12 +13,17 @@ import {
   Table,
 } from "react-bootstrap";
 import TopNav from "../Navbar/TopNav";
-
+import "/node_modules/jquery/dist/jquery.min.js";
+//Datatable Modules 
+import "/node_modules/datatables.net-dt/js/dataTables.dataTables";
+import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
+import $ from "jquery";
+import { Link, useNavigate } from "react-router-dom";
 const SalesList = () => {
   const [salesList, setSalesList] = useState([]);
-
-  const getSalesList = () => {
-    axios
+  const navigate = useNavigate();
+  const getSalesList = async () => {
+    await axios
       .get("http://192.168.7.148:8011/transactions/saleitem/", {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
@@ -28,23 +33,32 @@ const SalesList = () => {
         setSalesList(res.data);
         console.log(res.data);
       });
+    getDataTable();
   };
+  const getDataTable = () => {
+    $(document).ready(function () {
+      $("#example").DataTable();
+    });
+  }
   const handleEdit = (e, id) => {
     e.preventDefault();
+    alert("Hii")
+    navigate('/editSale/' + id)
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
     alert(id);
+    axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/").then(res => {
+      console.log(res.data);
+      setSalesList(salesList.filter(item => item.id !== id));
+    })
   };
   useEffect(() => {
     getSalesList();
-    // $(document).ready(function () {
-    //     $("#example").DataTable();
-    //   });
   }, []);
   return (
     <Container fluid>
-      <TopNav/>
+      <TopNav />
       <div className="mt-3 supplier-list-title">Sales List</div>
       <hr />
       <div className="d-flex justify-content-between">
@@ -52,7 +66,7 @@ const SalesList = () => {
           <p>Sales List</p>
         </div>
         <div className="addStockBtn">
-          <Button className="addNewStockBtn fs-5">Add New Sales</Button>
+          <Link to={'/newSale'}><Button className="addNewStockBtn fs-5">Add New Sales</Button></Link>
         </div>
       </div>
       <InputGroup className="mb-3 mt-4">
@@ -62,7 +76,7 @@ const SalesList = () => {
         </InputGroup.Text>
       </InputGroup>
 
-      <Table responsive="sm">
+      {/* <table id="example">
         <thead
           style={{
             borderStyle: "none",
@@ -100,7 +114,49 @@ const SalesList = () => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </table> */}
+      <table id="example">
+        <thead
+          style={{
+            borderStyle: "none",
+            backgroundColor: "#707070",
+            color: "white",
+          }}
+        >
+          <tr>
+            <th>#</th>
+            <th>Bill No</th>
+            <th>Quantity</th>
+            <th>Per Pice</th>
+            <th>Total Price</th>
+            <th>Stock</th>
+            <th className="text-center">
+              Edit
+            </th>
+            <th className="text-center">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {salesList.map((map, i) => (
+            <tr key={i}>
+              <td>{i + 1}</td>
+              <td>{map.billno}</td>
+              <td>{map.quantity}</td>
+              <td>{map.perprice}</td>
+              <td>{map.totalprice}</td>
+              <td>{map.stock_name}</td>
+              <td>
+                <Button onClick={(e) => handleEdit(e, map.id)}>Edit</Button>
+              </td>
+              <td>
+                <Button onClick={(e) => handleDelete(e, map.id)}>Delete</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </Container>
   );
 };

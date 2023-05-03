@@ -10,8 +10,8 @@ function TopNav() {
 
     return (
         <Navbar bg="light" variant='light' expand="md" expanded={expanded} className='d-flex justify-content-around p-2' >
-           {/* <Image src={minilogo} alt="minilogo" height={"80px"} width={"80px"} roundedCircle /> */}
-            <Navbar.Toggle onClick={toggleNavbar} aria-controls="basic-navbar-nav" />
+           {/* <Image src={minilogo} alt="minilogo" height={"100px"} width={"100px"} roundedCircle /> */}
+            <Navbar.Toggle onClick={toggleNavbar} aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav" >
             <Nav className="justify-content-around w-100">
                     {/* <Nav.Link href="#home" >Home</Nav.Link>
@@ -28,7 +28,9 @@ function TopNav() {
                     </NavDropdown>
                     <NavDropdown title="Transactions" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/newSale">New Sale</NavDropdown.Item>
-                        <NavDropdown.Item href="/salesList">Sales List</NavDropdown.Item>                        {/* <NavDropdown.Divider />
+                        <NavDropdown.Item href="/salesList">Sales List</NavDropdown.Item>
+                        <NavDropdown.Item href="/searchByBillno">Search By Bill No</NavDropdown.Item>
+                                                {/* <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                     </NavDropdown>
                     {/* <NavDropdown title="Contact Us" id="basic-nav-dropdown">

@@ -19,7 +19,7 @@ import {
   Table,
 } from "react-bootstrap";
 import TopNav from "../Navbar/TopNav";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const InventoryList = () => {
 
@@ -37,14 +37,14 @@ const InventoryList = () => {
   const handleEdit = (e, id) => {
     e.preventDefault();
     alert("Hii")
-    navigate('/edit/' + id)
+    navigate('/editStock/' + id)
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
     alert(id);
-    axios.delete("http://192.168.7.148:8011/inventory/stock/"+id+"/").then(res=>{
+    axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/").then(res => {
       console.log(res.data);
-      window.location.reload();
+      setInventoryList(inventoryList.filter(item => item.id !== id));
     })
   };
   const getDataTable = () => {
@@ -66,7 +66,7 @@ const InventoryList = () => {
           <p>Inventory List</p>
         </div>
         <div className="addStockBtn">
-          <Button className="addNewStockBtn fs-5">Add New Stock</Button>
+          <Link to='/newStock'><Button className="addNewStockBtn fs-5">Add New Stock</Button></Link>
         </div>
       </div>
       <InputGroup className="mb-3 mt-4">

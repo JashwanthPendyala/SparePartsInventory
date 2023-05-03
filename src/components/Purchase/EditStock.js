@@ -25,19 +25,21 @@ const EditStock = () => {
         name: "",
         price: "",
         quantity: "",
-        supplier: "",
-        buy: ""
+        supplier_name: "",
+        supplier_id: ""
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put("http://192.168.7.148:8011/inventory/stock/"+id+"/", data, {
+
+        console.log(data);
+        axios.patch("http://192.168.7.148:8011/inventory/stock/" + id + "/", data, {
             headers: {
                 "Authorization": "Token " + localStorage.getItem("token")
             }
         }).then((res) => {
             console.log(res.data)
             //Toastify
-            navigate("/inventoryList")
+            // navigate("/inventoryList")
         });
 
 
@@ -64,11 +66,11 @@ const EditStock = () => {
             <TopNav />
             <div className="mt-3">
                 <div className="supplier-title">
-                    <p>New Stock</p>
+                    <p>Edit Stock</p>
                 </div>
                 <hr />
                 <div className="supplier-sub-title">
-                    <p>New Stock</p>
+                    <p>Edit Stock</p>
                 </div>
                 <Form className="justify-content-md-center">
                     <Row className="mb-3">
@@ -110,7 +112,13 @@ const EditStock = () => {
                                 aria-label="Default select example"
                                 className="supplier-input"
                                 value={data.supplier}
-                                onChange={(e) => setData({ ...data, supplier: e.target.selectedIndex.text, buy: e.target.value })}
+                                onChange={(e) => {
+
+                                    const selectedIndex = e.target.selectedIndex;
+                                    const selectedOption = e.target.options[selectedIndex];
+                                    setData({ ...data, supplier_name: selectedOption.text, supplier_id: e.target.value })
+                                }
+                                }
                             // onChange={(e) => {
                             //     setSupplier(e.target.selectedIndex.text);
                             //     setBuy(e.target.value);

@@ -25,20 +25,27 @@ const NewSale = () => {
   const [stockList, setStockList] = useState([]);
   const token = localStorage.getItem("token");
   const [billNO, setBillNo] = useState("");
+  const saleBill = {
+    name: "",
+    phone: "",
+    address: "",
+    email: "",
+    gstin: "",
+  };
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const saleBill = {
-      name: name,
-      phone: phone,
-      address: address,
-      email: email,
-      gstin: gstin,
-    };
+    // const saleBill = {
+    //   name: name,
+    //   phone: phone,
+    //   address: address,
+    //   email: email,
+    //   gstin: gstin,
+    // };
     axios
       .post("http://192.168.7.148:8011/transactions/saleBill/", saleBill, {
         headers: {
-          Authorization: "Token " + localStorage.getItem("token"),
+          Authorization: "Token " + localStorage.getItem("token")
         },
       })
       .then((res) => {
@@ -53,7 +60,7 @@ const NewSale = () => {
       billno: billNO,
       stock: buy,
     };
-    console.log(saleItem," Sale Item With Bill No");
+    console.log(saleItem, " Sale Item With Bill No");
     axios
       .post("http://192.168.7.148:8011/transactions/saleitem/", saleItem, {
         headers: {
@@ -75,9 +82,9 @@ const NewSale = () => {
     setBill(price * qty);
   };
   useEffect(() => {
-    //   if(token === ""){
-    //       navigate("/")
-    //   }
+      if(token === ""){
+          navigate("/")
+      }
     axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
       setStockList(res.data);
       console.log(res.data);
@@ -86,8 +93,9 @@ const NewSale = () => {
 
   return (
     <Container fluid>
-    <TopNav />
-    <div className="mt-3">
+      <TopNav />
+      <Container>
+      <div className="mt-3">
         <div className="supplier-title">
           <p>New Sale</p>
         </div>
@@ -100,6 +108,7 @@ const NewSale = () => {
             <Col sm={12} md={6}>
               <Form.Label>Customer Name</Form.Label>
               <Form.Control
+                required
                 type="text"
                 className="supplier-input"
                 onChange={(e) => setName(e.target.value)}
@@ -109,6 +118,7 @@ const NewSale = () => {
             <Col sm={12} md={6}>
               <Form.Label>Phone</Form.Label>
               <Form.Control
+                required
                 type="text"
                 className="supplier-input"
                 onChange={(e) => setPhone(e.target.value)}
@@ -119,6 +129,7 @@ const NewSale = () => {
             <Col sm={12} md={6}>
               <Form.Label>Email</Form.Label>
               <Form.Control
+                required
                 type="email"
                 className="supplier-input"
                 onChange={(e) => setEmail(e.target.value)}
@@ -128,6 +139,7 @@ const NewSale = () => {
             <Col sm={12} md={6}>
               <Form.Label>GSTIN No.</Form.Label>
               <Form.Control
+                required
                 type="text"
                 className="supplier-input"
                 onChange={(e) => setGstin(e.target.value)}
@@ -137,6 +149,7 @@ const NewSale = () => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Address</Form.Label>
             <Form.Control
+              required
               as="textarea"
               rows={3}
               className="supplier-input"
@@ -151,6 +164,7 @@ const NewSale = () => {
             <Col>
               <Form.Label>Stock</Form.Label>
               <Form.Select
+                required
                 aria-label="Default select example"
                 onChange={(e) => {
                   setStock(e.target.selectedIndex.text);
@@ -168,6 +182,7 @@ const NewSale = () => {
             <Col>
               <Form.Label>Price</Form.Label>
               <Form.Control
+                required
                 type="text"
                 value={price}
                 aria-label="Disabled input example"
@@ -178,6 +193,7 @@ const NewSale = () => {
             <Col>
               <Form.Label>Quantity</Form.Label>
               <Form.Control
+                required
                 type="number"
                 value={qty}
                 onChange={(e) => {
@@ -189,6 +205,7 @@ const NewSale = () => {
             <Col>
               <Form.Label>Total</Form.Label>
               <Form.Control
+                required
                 type="text"
                 value={bill}
                 aria-label="Disabled input example"
@@ -206,6 +223,7 @@ const NewSale = () => {
             </div>
             <div className="ms-4">
               <Button
+                type="submit"
                 size="lg"
                 className="add-supplier-btn"
                 onClick={(e) => handleSubmit(e)}
@@ -216,6 +234,7 @@ const NewSale = () => {
           </div>
         </Form>
       </div>
+      </Container>
     </Container>
   );
 };
