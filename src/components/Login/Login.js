@@ -9,6 +9,7 @@ import useMatchMedia from "use-match-media";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import minilogo from "../Images/Group 4.svg";
+import AxiosServices from "../Services/AxiosServices";
 // import { useWindowSize } from "@react-hook/window-size";
 
 const Login = () => {
@@ -27,7 +28,7 @@ const Login = () => {
     setEmail("");
     setPassword("");
     console.log(data);
-    axios.post("http://192.168.7.148:8011/user/login/", data).then((res) => {
+    AxiosServices.login(data).then((res) => {
       console.log(res.data);
       if (res.data.token == undefined) {
         toast.error("Invalid credentials", {

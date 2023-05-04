@@ -7,6 +7,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AxiosServices from "../Services/AxiosServices";
 
 // import { useWindowSize } from "@react-hook/window-size";
 
@@ -22,11 +23,12 @@ const Profile = () => {
             old_password1: oldPassword,
             new_password2: newPassword
         };
-        axios.post("http://192.168.7.148:8011/user/changepas/", data, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then((res) => {
+        // axios.post("http://192.168.7.148:8011/user/changepas/", data, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        AxiosServices.changePassword(data).then((res) => {
             console.log(res.status);
             if (res.status === 200) {
                 console.log("status done");

@@ -13,6 +13,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import AxiosServices from "../Services/AxiosServices";
 const SearchByBill = () => {
     const token = localStorage.getItem("token")
     const [data, setData] = useState([])
@@ -26,13 +27,17 @@ const SearchByBill = () => {
     const [visibility, setVisibility] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://192.168.7.148:8011/transactions/salebilldetails/", {
-            "billno": billno
-        }, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then((res) => {
+        // axios.post("http://192.168.7.148:8011/transactions/salebilldetails/", {
+        //     "billno": billno
+        // }, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        const data = {
+            billno:billno
+        }
+        AxiosServices.getSaleBillDetails(data).then((res) => {
            
              setData(res.data[0])
         

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import TopNav from '../Navbar/TopNav'
 import { toast } from 'react-toastify'
+import AxiosServices from '../Services/AxiosServices'
 const NewSupplier = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -22,11 +23,12 @@ const NewSupplier = () => {
             "email": email,
             "gstin": gstin
         }
-        axios.post("http://192.168.7.148:8011/inventory/supplier/", data, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then(res => {
+        // axios.post("http://192.168.7.148:8011/inventory/supplier/", data, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        AxiosServices.addSupplier(data).then(res => {
             console.log(res.status);
             if (res.status === 201) {
                 console.log("status done");
@@ -49,9 +51,6 @@ const NewSupplier = () => {
             navigate("/")
         }
     })
-
-
-
     return (
         <Container fluid>
             <TopNav />

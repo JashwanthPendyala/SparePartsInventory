@@ -19,17 +19,19 @@ import "/node_modules/datatables.net-dt/js/dataTables.dataTables";
 import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import { Link, useNavigate } from "react-router-dom";
+import AxiosServices from "../Services/AxiosServices";
 const SalesList = () => {
   const [salesList, setSalesList] = useState([]);
   const navigate = useNavigate();
   const getSalesList = async () => {
-    await axios
-      .get("http://192.168.7.148:8011/transactions/saleitem/", {
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
+    // await 
+    // axios
+    //   .get("http://192.168.7.148:8011/transactions/saleitem/", {
+    //     headers: {
+    //       Authorization: "Token " + localStorage.getItem("token"),
+    //     },
+    //   })
+     await AxiosServices.getSaleItem().then((res) => {
         setSalesList(res.data);
         console.log(res.data);
       });
@@ -48,7 +50,9 @@ const SalesList = () => {
   const handleDelete = (e, id) => {
     e.preventDefault();
     alert(id);
-    axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/").then(res => {
+    // axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
+    
+    AxiosServices.deleteStock(id).then(res => {
       console.log(res.data);
       setSalesList(salesList.filter(item => item.id !== id));
     })

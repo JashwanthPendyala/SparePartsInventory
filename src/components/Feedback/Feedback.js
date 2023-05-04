@@ -12,6 +12,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
 import { toast } from "react-toastify";
+import AxiosServices from "../Services/AxiosServices";
 const Feedback = () => {
   const [Que1, setQue1] = useState("");
   const [Que2, setQue2] = useState("");
@@ -27,19 +28,19 @@ const Feedback = () => {
       Que3: Que3,
       Que4: Que4,
     };
-    axios
-      .post("http://192.168.7.148:8011/user/feedback/", data, {
-        headers: {
-          Authorization: "Token " + token,
-        },
+    // axios
+    //   .post("http://192.168.7.148:8011/user/feedback/", data, {
+    //     headers: {
+    //       Authorization: "Token " + token,
+    //     },
+    //   })
+    AxiosServices.feedback(data).then((res) => {
+      console.log(res.data);
+      toast.success("Feedback Submitted Successfully...!", {
+        position: "top-right",
+        theme: "colored"
       })
-      .then((res) => {
-        console.log(res.data);
-        toast.success("Feedback Submitted Successfully...!",{
-            position: "top-right",
-            theme: "colored"
-        })
-      });
+    });
   };
   useEffect(() => {
     if (token === "") {

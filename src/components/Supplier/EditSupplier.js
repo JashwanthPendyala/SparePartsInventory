@@ -12,6 +12,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
 import { toast } from "react-toastify";
+import AxiosServices from "../Services/AxiosServices";
 const EditSupplier = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,17 +33,17 @@ const EditSupplier = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    axios
-      .patch(
-        "http://192.168.7.148:8011/inventory/supplier/" + data.id + "/",
-        data,
-        {
-          headers: {
-            Authorization: "Token " + token,
-          },
-        }
-      )
-      .then((res) => {
+    // axios
+    //   .patch(
+    //     "http://192.168.7.148:8011/inventory/supplier/" + data.id + "/",
+    //     data,
+    //     {
+    //       headers: {
+    //         Authorization: "Token " + token,
+    //       },
+    //     }
+    //   )
+     AxiosServices.editSupplier(data.id).then((res) => {
         console.log(res.status);
         if (res.status === 200) {
           console.log("status done");
@@ -58,9 +59,9 @@ const EditSupplier = () => {
     if (token === "") {
       navigate("/");
     }
-    axios
-      .get("http://192.168.7.148:8011/inventory/supplier/" + id)
-      .then((res) => {
+    // axios
+    //   .get("http://192.168.7.148:8011/inventory/supplier/" + id+"/")
+     AxiosServices.getSupplierById(id).then((res) => {
         setData(res.data);
       });
   }, []);

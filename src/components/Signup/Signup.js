@@ -155,6 +155,7 @@ import axios from "axios";
 import useMatchMedia from "use-match-media";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import AxiosServices from "../Services/AxiosServices";
 
 // import { useWindowSize } from "@react-hook/window-size";
 
@@ -179,7 +180,9 @@ const Signup = () => {
       password1: password,
       password2: confirmPassword,
     };
-    axios.post("http://192.168.7.148:8011/user/signup/", data).then((res) => {
+    // axios.post("http://192.168.7.148:8011/user/signup/", data)
+    
+    AxiosServices.signup(data).then((res) => {
       console.log(res.status);
       if (res.status === 200) {
         console.log("status done");

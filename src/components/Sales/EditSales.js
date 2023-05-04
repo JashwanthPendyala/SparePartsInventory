@@ -11,6 +11,7 @@ import "./Sales.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
+import AxiosServices from "../Services/AxiosServices";
 const EditSales = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -70,7 +71,9 @@ const EditSales = () => {
     };
 
     const getStockPrice = (id) => {
-        axios.get("http://192.168.7.148:8011/inventory/stock/" + id).then((res) => {
+        // axios.get("http://192.168.7.148:8011/inventory/stock/" + id)
+        
+        AxiosServices.getStockById(id).then((res) => {
             console.log(res.data);
             // setPrice(res.data.price);
             setSaleItem({ ...saleItem, perprice: res.data.price, quantity: 0, totalprice: 0 })
@@ -79,11 +82,12 @@ const EditSales = () => {
 
     const getSaleBill = (billno) => {
         console.log(billno, "Hii");
-        axios.get("http://192.168.7.148:8011/transactions/saleBill/" + billno, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then(res => {
+        // axios.get("http://192.168.7.148:8011/transactions/saleBill/" + billno, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        AxiosServices.getSaleBillByBillNo(billno).then(res => {
             setSaleBill(res.data)
         })
     }
@@ -96,15 +100,19 @@ const EditSales = () => {
         //   if(token === ""){
         //       navigate("/")
         //   }
-        axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
+        // axios.get("http://192.168.7.148:8011/inventory/stock/")
+        
+        AxiosServices.getStock().then((res) => {
             setStockList(res.data);
             console.log(res.data);
         });
-        axios.get("http://192.168.7.148:8011/transactions/saleitem/" + id, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then(res => {
+        // axios.get("http://192.168.7.148:8011/transactions/saleitem/" + id, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        
+       AxiosServices.getSaleItemById().then(res => {
             console.log(res.data);
             setSaleItem(res.data);
             getSaleBill(res.data.billno);

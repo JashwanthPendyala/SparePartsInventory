@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
 import minilogo from '../Images/Group 4.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function TopNav() {
   const [expanded, setExpanded] = useState(false);
@@ -36,7 +37,7 @@ function TopNav() {
           </NavDropdown>
           <Nav.Link href="/contactus">Contact Us</Nav.Link>
           <Nav.Link href="/feedback">Feedback</Nav.Link>
-          <NavDropdown id="image-dropdown" title={<Image src={minilogo} alt="Transactions" rounded/>}>
+          <NavDropdown id="image-dropdown" title={"Admin"}>
             <NavDropdown.Item href="/newSale">New Sale</NavDropdown.Item>
             <NavDropdown.Item href="/salesList">Sales List</NavDropdown.Item>
             <NavDropdown.Item href="/searchByBillno">Search By Bill No</NavDropdown.Item>

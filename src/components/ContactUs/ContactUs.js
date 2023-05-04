@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import TopNav from '../Navbar/TopNav'
 import { toast } from 'react-toastify'
+import AxiosServices from '../Services/AxiosServices'
 const ContactUs = () => {
 
     const [email, setEmail] = useState("");
@@ -21,11 +22,12 @@ const ContactUs = () => {
             "message": message,
 
         }
-        axios.post("http://192.168.7.148:8011/user/contact/", data, {
-            headers: {
-                "Authorization": "Token " + token
-            }
-        }).then(res => {
+        // axios.post("http://192.168.7.148:8011/user/contact/", data, {
+        //     headers: {
+        //         "Authorization": "Token " + token
+        //     }
+        // })
+        AxiosServices.contact(data).then(res => {
             console.log(res.data);
             
             toast.success("Request Submitted Successfully...!",{

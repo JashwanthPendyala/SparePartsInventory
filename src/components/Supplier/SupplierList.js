@@ -20,14 +20,19 @@ import "/node_modules/datatables.net-dt/js/dataTables.dataTables";
 import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import { toast } from "react-toastify";
+import AxiosServices from "../Services/AxiosServices";
 
 const SupplierList = () => {
   const [supplierList, setSupplierList] = useState([]);
   const navigate = useNavigate();
   const getSupplierList = async () => {
-    await axios
-      .get("http://192.168.7.148:8011/inventory/supplier/")
-      .then((res) => {
+    // await axios
+    //   .get("http://192.168.0.25:8000/inventory/supplier/",{
+    //     headers:{
+    //       "Authorization":"Token "+localStorage.getItem("token")
+    //     }
+    //   })
+      await AxiosServices.getSupplier().then((res) => {
         setSupplierList(res.data);
       });
     getDataTable();
@@ -38,9 +43,9 @@ const SupplierList = () => {
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
-    axios
-      .delete("http://192.168.7.148:8011/inventory/supplier/" + id + "/")
-      .then((res) => {
+    // axios
+    //   .delete("http://192.168.7.148:8011/inventory/supplier/" + id + "/")
+      AxiosServices.deleteSupplier(id).then((res) => {
         console.log(res.data);
         toast.success("Deleted Successfully...!",{
             position: "top-right",

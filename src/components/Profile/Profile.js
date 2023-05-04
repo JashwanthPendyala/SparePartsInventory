@@ -30,7 +30,7 @@ const Profile = () => {
       last_name: lastname,
       mobile_number: phone,
       password1: password,
-      password2: confirmPassword,
+      password2: confirmPassword
     };
     axios.post("http://192.168.7.148:8011/user/signup/", data).then((res) => {
       console.log(res.status);
