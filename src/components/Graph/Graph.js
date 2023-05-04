@@ -21,14 +21,15 @@ const Graph = () => {
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 2,
             data: []
-          },
-          {
-            label: 'Price',
-            backgroundColor: 'rgba(255,99,132,1)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
-            data: []
           }
+        //   ,
+        //   {
+        //     label: 'Price',
+        //     backgroundColor: 'rgba(255,99,132,1)',
+        //     borderColor: 'rgba(0,0,0,1)',
+        //     borderWidth: 2,
+        //     data: []
+        //   }
         ]
       });
       
@@ -36,7 +37,7 @@ const Graph = () => {
 
 
     useEffect(() => {
-        axios.get('http://192.168.0.8:8011/transactions/recentstock/')
+        axios.get('http://192.168.3.48:8000/transactions/leastQty/')
             .then(response => {
                 console.log(response.data);
                 setData({
@@ -48,14 +49,15 @@ const Graph = () => {
                             borderColor: 'rgba(0,0,0,1)',
                             borderWidth: 2,
                             data: response.data.map(item => item.quantity)
-                        },
-                        {
-                            label: 'Price',
-                            backgroundColor: 'rgba(255,99,132,1)',
-                            borderColor: 'rgba(0,0,0,1)',
-                            borderWidth: 2,
-                            data: response.data.map(item => item.price)
                         }
+                        // ,
+                        // {
+                        //     label: 'Price',
+                        //     backgroundColor: 'rgba(255,99,132,1)',
+                        //     borderColor: 'rgba(0,0,0,1)',
+                        //     borderWidth: 2,
+                        //     data: response.data.map(item => item.price)
+                        // }
                     ]
                 });
             })

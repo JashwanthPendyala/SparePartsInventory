@@ -24,7 +24,7 @@ const SalesList = () => {
   const navigate = useNavigate();
   const getSalesList = async () => {
     await axios
-      .get("http://192.168.0.8:8011/transactions/saleitem/", {
+      .get("http://192.168.7.148:8011/transactions/saleitem/", {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -48,7 +48,7 @@ const SalesList = () => {
   const handleDelete = (e, id) => {
     e.preventDefault();
     alert(id);
-    axios.delete("http://192.168.0.8:8011/inventory/stock/" + id + "/").then(res => {
+    axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/").then(res => {
       console.log(res.data);
       setSalesList(salesList.filter(item => item.id !== id));
     })

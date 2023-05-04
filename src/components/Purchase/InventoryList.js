@@ -26,7 +26,7 @@ const InventoryList = () => {
   const [supplierName, setSupplierName] = useState("");
   const navigate = useNavigate();
   const getInventoryList = async () => {
-    await axios.get("http://192.168.0.8:8011/inventory/stock/").then((res) => {
+    await axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
       setInventoryList(res.data);
       console.log(res.data);
     });
@@ -42,7 +42,7 @@ const InventoryList = () => {
     e.preventDefault();
 
     axios
-      .delete("http://192.168.0.8:8011/inventory/stock/" + id + "/")
+      .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
       .then((res) => {
         console.log(res.data);
         setInventoryList(inventoryList.filter((item) => item.id !== id));

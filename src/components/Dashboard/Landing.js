@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useState } from 'react'
 Chart.register(LinearScale, CategoryScale, BarElement)
 
-function LandingPage1() {
+function Landing() {
     const [data, setData] = useState('')
     const [name, setName] = useState([])
     const [quantity, setQuantity] = useState([])

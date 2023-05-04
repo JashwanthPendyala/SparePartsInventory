@@ -21,7 +21,7 @@ const ContactUs = () => {
             "message": message,
 
         }
-        axios.post("http://192.168.0.8:8011/user/contact/", data, {
+        axios.post("http://192.168.7.148:8011/user/contact/", data, {
             headers: {
                 "Authorization": "Token " + token
             }

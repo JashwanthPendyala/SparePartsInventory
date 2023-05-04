@@ -28,7 +28,7 @@ const Feedback = () => {
       Que4: Que4,
     };
     axios
-      .post("http://192.168.0.8:8011/user/feedback/", data, {
+      .post("http://192.168.7.148:8011/user/feedback/", data, {
         headers: {
           Authorization: "Token " + token,
         },

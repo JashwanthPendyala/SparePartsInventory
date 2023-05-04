@@ -26,7 +26,7 @@ const SearchByBill = () => {
     const [visibility, setVisibility] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://192.168.0.8:8011/transactions/salebilldetails/", {
+        axios.post("http://192.168.7.148:8011/transactions/salebilldetails/", {
             "billno": billno
         }, {
             headers: {

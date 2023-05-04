@@ -31,7 +31,7 @@ const NewStock = () => {
       supplier_id: buy
     };
     axios
-      .post("http://192.168.0.8:8011/inventory/stock/", data, {
+      .post("http://192.168.7.148:8011/inventory/stock/", data, {
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
         },
@@ -56,7 +56,7 @@ const NewStock = () => {
     if (token === "") {
       navigate("/");
     }
-    axios.get("http://192.168.0.8:8011/inventory/supplier/").then((res) => {
+    axios.get("http://192.168.7.148:8011/inventory/supplier/").then((res) => {
       setSupplierList(res.data);
       console.log(res.data);
     });

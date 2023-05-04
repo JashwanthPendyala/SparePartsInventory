@@ -27,7 +27,7 @@ const Login = () => {
     setEmail("");
     setPassword("");
     console.log(data);
-    axios.post("http://192.168.0.8:8011/user/login/", data).then((res) => {
+    axios.post("http://192.168.7.148:8011/user/login/", data).then((res) => {
       console.log(res.data);
       if (res.data.token == undefined) {
         toast.error("Invalid credentials", {

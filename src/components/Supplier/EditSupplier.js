@@ -34,7 +34,7 @@ const EditSupplier = () => {
     console.log(data);
     axios
       .patch(
-        "http://192.168.0.8:8011/inventory/supplier/" + data.id + "/",
+        "http://192.168.7.148:8011/inventory/supplier/" + data.id + "/",
         data,
         {
           headers: {
@@ -59,7 +59,7 @@ const EditSupplier = () => {
       navigate("/");
     }
     axios
-      .get("http://192.168.0.8:8011/inventory/supplier/" + id)
+      .get("http://192.168.7.148:8011/inventory/supplier/" + id)
       .then((res) => {
         setData(res.data);
       });

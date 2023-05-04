@@ -26,7 +26,7 @@ const SupplierList = () => {
   const navigate = useNavigate();
   const getSupplierList = async () => {
     await axios
-      .get("http://192.168.0.8:8011/inventory/supplier/")
+      .get("http://192.168.7.148:8011/inventory/supplier/")
       .then((res) => {
         setSupplierList(res.data);
       });
@@ -39,7 +39,7 @@ const SupplierList = () => {
   const handleDelete = (e, id) => {
     e.preventDefault();
     axios
-      .delete("http://192.168.0.8:8011/inventory/supplier/" + id + "/")
+      .delete("http://192.168.7.148:8011/inventory/supplier/" + id + "/")
       .then((res) => {
         console.log(res.data);
         toast.success("Deleted Successfully...!",{
