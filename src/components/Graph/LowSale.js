@@ -11,7 +11,7 @@ Chart.register(CategoryScale);
 // Now you can create your chart as usual
 
 
-const Graph = () => {
+const LowSale = () => {
     const [data, setData] = useState({
         labels: [],
         datasets: [
@@ -37,7 +37,7 @@ const Graph = () => {
 
 
     useEffect(() => {
-        axios.get('http://192.168.3.61:8011/transactions/leastQty/',{
+        axios.get('http://192.168.3.61:8011/transactions/salelow/',{
             headers:{
                 Authorization:"Token "+localStorage.getItem("token")
             }
@@ -94,4 +94,4 @@ const Graph = () => {
 
 
 
-export default Graph
+export default LowSale

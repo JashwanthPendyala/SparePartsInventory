@@ -23,6 +23,7 @@ import EditSupplier from "./components/Supplier/EditSupplier";
 import Graph from "./components/Graph/Graph";
 import SearchByBill from "./components/Sales/SearchByBill";
 import Dash from "./components/Home/Home";
+import ChangePassword from "./components/Profile/ChangePassword";
 
 function App() {
   // const [token, setToken] = useState("")
@@ -79,6 +80,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>         
           <Route path="/topnav" element={<TopNav/>}/>
           <Route path="/contactus" element={<ContactUs/>}/>
+          <Route path="/changepas"element={<ChangePassword/>}/>
           <Route path="/feedback" element={<Feedback/>}/>
           <Route path="/home" element={<Dash/>}/>
           <Route path="/editStock/:id" element={<EditStock/>}/>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = "http://192.168.0.25:8000"
+const url = "http://192.168.7.148:8011"
 const headers = {
     Authorization: 'Token ' + localStorage.getItem("token")
 };
@@ -17,10 +17,15 @@ class AxiosServices {
     login(data) {
         return axios.post(url + "/user/login/", data);
     }
+    logout(){
+        return axios.get(url+"/user/logout",{
+            headers
+        })
+    }
 
     //changePassword
     changePassword(data){
-        return axios.post(url+"/user/changePass/",data,{
+        return axios.patch(url+"/user/changepas/",data,{
             headers
         })
     }
@@ -80,16 +85,34 @@ class AxiosServices {
     }
 
     getSaleItem() {
-        return axios.post(url + "/transactions/saleitem/", {
+        return axios.get(url + "/transactions/saleitem/", {
             headers
         })
     }
 
     getSaleBillDetails(data) {
-        return axios.post(url + "transactions/salebilldetails/", data, {
+        return axios.post(url + "/transactions/salebilldetails/", data, {
             headers
         })
     }
+    deleteSale(id){
+        return axios.delete(url+"/transactions/saleitem/"+id+"/",{
+            headers
+        })
+    }
+
+    edittSaleItem(id,data){
+        return axios.patch(url+"/transactions/saleBill/"+id+"/",data,{
+            headers
+        })
+    }
+
+    editSaleBill(id,data){
+        return axios.patch(url+"/transactions/saleitem/"+id+"/",data,{
+            headers
+        })
+    }
+
 
     //Supplier
 

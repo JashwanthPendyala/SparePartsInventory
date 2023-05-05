@@ -52,7 +52,7 @@ const SalesList = () => {
     alert(id);
     // axios.delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
     
-    AxiosServices.deleteStock(id).then(res => {
+    AxiosServices.deleteSale(id).then(res => {
       console.log(res.data);
       setSalesList(salesList.filter(item => item.id !== id));
     })
@@ -63,6 +63,7 @@ const SalesList = () => {
   return (
     <Container fluid>
       <TopNav />
+      <Container>
       <div className="mt-3 supplier-list-title">Sales List</div>
       <hr />
       <div className="d-flex justify-content-between">
@@ -161,6 +162,7 @@ const SalesList = () => {
           ))}
         </tbody>
       </table>
+      </Container>
     </Container>
   );
 };

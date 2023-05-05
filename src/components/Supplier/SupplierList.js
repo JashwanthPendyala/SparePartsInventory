@@ -34,7 +34,9 @@ const SupplierList = () => {
     //   })
       await AxiosServices.getSupplier().then((res) => {
         setSupplierList(res.data);
+        console.log(res.data);
       });
+     
     getDataTable();
   };
   const handleEdit = (e, id) => {
@@ -51,7 +53,8 @@ const SupplierList = () => {
             position: "top-right",
             theme: "colored"
         })
-        setSupplierList(supplierList.filter((item) => item.id !== id));
+        // setSupplierList(supplierList.filter((item) => item.id !== id));
+        window.location.reload()
       });
   };
   const getDataTable = () => {

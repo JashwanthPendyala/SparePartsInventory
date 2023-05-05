@@ -12,6 +12,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TopNav from "../Navbar/TopNav";
 import AxiosServices from "../Services/AxiosServices";
+import { toast } from "react-toastify";
 const EditSales = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -41,33 +42,33 @@ const EditSales = () => {
         stock_name: "",
         id:""
     });
-
+    const flag = useState(true)
     const navigate = useNavigate();
     const { id } = useParams("id");
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(saleBill, " Bill");
         console.log(saleItem, "Item");
-        // axios
-        //     .put("http://192.168.7.148:8011/transactions/saleBill/" + saleItem.billno + "/", saleBill, {
-        //         headers: {
-        //             "Authorization": "Token " + localStorage.getItem("token")
-        //         }
-        //     })
-        //     .then((res) => {
-        //         console.log(res.data);
-
-        //     });
-
-        // axios
-        //     .put("http://192.168.7.148:8011/transactions/saleitem/" + id + "/", saleItem, {
-        //         headers: {
-        //             "Authorization": "Token " + localStorage.getItem("token")
-        //         }
-        //     })
-        //     .then((res) => console.log(res.data));
-
-        // navigate("/salesList")
+        console.log(saleItem.billno, "Hii");
+        AxiosServices.editSaleBill(saleItem.billno,saleBill).then(res=>{
+            console.log(res.data)
+            if(res.status != 200){
+                flag = false;
+            }
+        })
+        AxiosServices.edittSaleItem(id,saleItem).then(res=>{
+            console.log(res.data)
+            if(res.status != 200){
+                flag = false;
+            }
+        })
+        if(flag){
+            toast.success("Sale Edited Successfully..!", {
+                position: "top-right",
+                theme: "colored",
+              });
+            navigate("/salesList")
+        }
     };
 
     const getStockPrice = (id) => {

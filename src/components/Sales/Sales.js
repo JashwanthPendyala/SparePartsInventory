@@ -27,53 +27,91 @@ const NewSale = () => {
   const [stockList, setStockList] = useState([]);
   const token = localStorage.getItem("token");
   const [billNO, setBillNo] = useState("");
-  // const saleBill = {
-  //   name: "",
-  //   phone: "",
-  //   address: "",
-  //   email: "",
-  //   gstin: "",
-  // };
- 
-  
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const [emailError, setEmailError] = useState("");
+  const [pwdError, setPasswordError] = useState("");
+  const [phoneerror, setPhoneError] = useState("");
+  const [addError, setAddressError] = useState("");
+  const [gstinError, setGstinError] = useState("");
+  const [qtyError, setQtyError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [buyError, setBuyError] = useState("");
+  const [nameError, setNameError] = useState("");
+
+  // const saleItem = {
+  //   quantity: qty,
+  //   perprice: price,
+  //   totalprice: bill,
+  //   billno: billNO,
+  //   stock: buy,
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const saleBill = {
-      name: name,
-      phone: phone,
-      address: address,
-      email: email,
-      gstin: gstin,
-    };
-    // axios
-    //   .post("http://192.168.7.148:8011/transactions/saleBill/", saleBill, {
-    //     headers: {
-    //       Authorization: "Token " + localStorage.getItem("token")
-    //     },
-    //   })
-      AxiosServices.SetSaleBill(saleBill).then((res) => {
+    let isValid = true;
+    setEmailError("");
+    setPasswordError("");
+    if (!name) {
+      setNameError("Name is required.");
+      isValid = false;
+    }
+    if (!phone) {
+      setPhoneError("Phone number is required.");
+      isValid = false;
+    }
+    if (!address) {
+      setAddressError("Address is required.");
+      isValid = false;
+    }
+    if (!email) {
+      setEmailError("Email is required.");
+      isValid = false;
+    }
+    if (!gstin) {
+      setGstinError("GSTIN is required.");
+      isValid = false;
+    }
+    if (!qty) {
+      setQtyError("Quantity is required.");
+      isValid = false;
+    }
+    if (!price) {
+      setPriceError("Price is required.");
+      isValid = false;
+    }
+    if (!buy) {
+      setBuyError("Stock is required.");
+      isValid = false;
+    }
+    if (isValid) {
+      const saleBill = {
+        name: name,
+        phone: phone,
+        address: address,
+        email: email,
+        gstin: gstin,
+      };
+     
+      let cc = 0;
+      await AxiosServices.setSaleBill(saleBill).then((res) => {
         console.log(res.data.billno, " BILL NO");
+        cc = res.data.billno;
         setBillNo(res.data.billno);
       });
-
-    const saleItem = {
-      quantity: qty,
-      perprice: price,
-      totalprice: bill,
-      billno: billNO,
-      stock: buy,
-    };
-    console.log(saleItem, " Sale Item With Bill No");
-    // axios
-    //   .post("http://192.168.7.148:8011/transactions/saleitem/", saleItem, {
-    //     headers: {
-    //       Authorization: "Token " + localStorage.getItem("token"),
-    //     },
-    //   })
-      AxiosServices.setSaleItem(saleItem).then((res) => console.log(res.data));
+      const saleItem = {
+        quantity: qty,
+        perprice: price,
+        totalprice: bill,
+        billno: cc,
+        stock: buy,
+      };
+      console.log(saleItem, " Sale Item With Bill No");
+      setSaleItem(saleItem)
+    }
   };
 
+  const setSaleItem = async (data) => {
+    await AxiosServices.setSaleItem(data).then((res) => console.log(res.data));
+  }
   const getStockPrice = (id) => {
     // axios.get("http://192.168.7.148:8011/inventory/stock/" + id)
     AxiosServices.getStockById(id).then((res) => {
@@ -82,19 +120,23 @@ const NewSale = () => {
     });
   };
 
+  const getInventoryStock = async () => {
+    await AxiosServices.getStock().then((res) => {
+      console.log(token);
+      setStockList(res.data);
+      console.log(res.data);
+    });
+  }
   const calBill = (qty) => {
     console.log(buy, " buy");
     setBill(price * qty);
   };
-  
+
   useEffect(() => {
     if (token === "") {
       navigate("/")
     }
-    AxiosServices.getStock().then((res) => {
-      setStockList(res.data);
-      console.log(res.data);
-    });
+    getInventoryStock();
   }, []);
 
   return (

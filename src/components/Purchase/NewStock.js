@@ -30,6 +30,7 @@ const NewStock = () => {
       supplier_name: supplier,
       supplier_id: buy
     };
+    console.log(data);
     axios
       .post("http://192.168.7.148:8011/inventory/stock/", data, {
         headers: {
@@ -114,8 +115,9 @@ const NewStock = () => {
                     setBuy(e.target.value);
                   }}
                 >
-                  {supplierList.map((contact) => (
-                    <option key={contact.id} value={contact.id}>
+                  <option>Select Supplier</option>
+                  {supplierList.map((contact,i) => (
+                    <option key={i} value={contact.id}>
                       {contact.name}
                     </option>
                   ))}

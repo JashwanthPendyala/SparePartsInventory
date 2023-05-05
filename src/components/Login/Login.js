@@ -16,31 +16,97 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   localStorage.setItem("token", "");
   // const size = useWindowSize();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   setEmail("");
+  //   setPassword("");
+  //   console.log(data);
+  //   AxiosServices.login(data).then((res) => {
+  //     console.log(res.data);
+  //     if (res.data.token == undefined) {
+  //       toast.error("Invalid credentials", {
+  //         position: "top-right",
+  //         theme: "colored",
+  //       });
+  //     } else {
+  //       localStorage.setItem("token", res.data.token);
+  //       navigate("/newSale");
+  //     }
+  //   });
+  // };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+    
+  //   if (!password && email) {
+  //     toast.error("Email and Password is mandatory", {
+  //       position: "top-right",
+  //       theme: "colored",
+  //     });
+  //     return;
+  //   }
+  //   const data = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   setEmail("");
+  //   setPassword("");
+  //   console.log(data);
+  //   AxiosServices.login(data).then((res) => {
+  //     console.log(res.data);
+  //     if (res.data.token == undefined) {
+  //       toast.error("Invalid credentials", {
+  //         position: "top-right",
+  //         theme: "colored",
+  //       });
+  //     } else {
+  //       localStorage.setItem("token", res.data.token);
+  //       navigate("/newSale");
+  //     }
+  //   });
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      email: email,
-      password: password,
-    };
-    setEmail("");
-    setPassword("");
-    console.log(data);
-    AxiosServices.login(data).then((res) => {
-      console.log(res.data);
-      if (res.data.token == undefined) {
-        toast.error("Invalid credentials", {
-          position: "top-right",
-          theme: "colored",
-        });
-      } else {
-        localStorage.setItem("token", res.data.token);
-        navigate("/newSale");
-      }
-    });
+    let isValid = true;
+    setEmailError("");
+    setPasswordError("");
+    if (!email) {
+      setEmailError("Email is required.");
+      isValid = false;
+    }
+    if (!password) {
+      setPasswordError("Password is required.");
+      isValid = false;
+    }
+    if (isValid) {
+      const data = {
+        email: email,
+        password: password,
+      };
+      setEmail("");
+      setPassword("");
+      console.log(data);
+      AxiosServices.login(data).then((res) => {
+        console.log(res.data);
+        if (res.data.token == undefined) {
+          setEmailError("Invalid credentials");
+          setPasswordError("");
+        } else {
+          localStorage.setItem("token", res.data.token);
+          navigate("/newSale");
+        }
+      });
+    }
   };
+
 
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
   return (
@@ -102,6 +168,7 @@ const Login = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </Form.Group>
+                    <p className="form-text text-danger">{emailError}</p>
                     <Form.Group className="mb-3 mt-3">
                       <Form.Label className="login-label">Password</Form.Label>
                       <Form.Control
@@ -110,6 +177,7 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
+                     <p className="form-text text-danger">{passwordError}</p>
                     </Form.Group>
                     <div className="text-center mt-3">
                       <Button

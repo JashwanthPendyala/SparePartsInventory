@@ -40,13 +40,24 @@ const InventoryList = () => {
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
-
+ alert(id)
+    // axios
+    //   .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setInventoryList(inventoryList.filter((item) => item.id !== id));
+    //   });
     axios
-      .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
-      .then((res) => {
-        console.log(res.data);
-        setInventoryList(inventoryList.filter((item) => item.id !== id));
-      });
+  .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
+  .then((res) => {
+    console.log(res.data);
+    // setInventoryList(inventoryList => inventoryList.filter((item) => item.id !== id));
+    window.location.reload();
+    // getInventoryList();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
   };
   const getDataTable = () => {
     $(document).ready(function () {

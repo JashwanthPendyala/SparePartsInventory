@@ -11,7 +11,7 @@ Chart.register(CategoryScale);
 // Now you can create your chart as usual
 
 
-const Graph = () => {
+const LeastQty = () => {
     const [data, setData] = useState({
         labels: [],
         datasets: [
@@ -94,4 +94,4 @@ const Graph = () => {
 
 
 
-export default Graph
+export default LeastQty

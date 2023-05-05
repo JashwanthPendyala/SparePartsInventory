@@ -8,10 +8,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AxiosServices from "../Services/AxiosServices";
+import TopNav from "../Navbar/TopNav";
 
 // import { useWindowSize } from "@react-hook/window-size";
 
-const Profile = () => {
+const ChangePassword = () => {
 
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -20,8 +21,8 @@ const Profile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-            old_password1: oldPassword,
-            new_password2: newPassword
+            old_password: oldPassword,
+            new_password: newPassword
         };
         // axios.post("http://192.168.7.148:8011/user/changepas/", data, {
         //     headers: {
@@ -32,16 +33,17 @@ const Profile = () => {
             console.log(res.status);
             if (res.status === 200) {
                 console.log("status done");
-                toast.success("Password Updated Successfully...!", {
+                toast.success("Password Updated Successfully...! Kindly login again...!", {
                     position: "top-right",
                     theme: "colored"
                 })
                 toast.success("Kindly login again...!", {
-                    position: "top-right",
+                    position: "top-left",
                     theme: "colored"
                 })
+                navigate("/")
             }
-            navigate("/")
+            
         });
     };
     useEffect(() => {
@@ -50,41 +52,51 @@ const Profile = () => {
         }
     })
     return (
-        <Container fluid className="full-height">
-            <Row className="full-height justify-content-center">
-                <Col lg={12} md={12} sm={12} className="p-0 shadow-lg">
-                    <Card className="cardborder p-4 h-100 shadow-lg full-height">
-                        <Card
-                            className="full-height"
-                            style={{ height: "inherit", width: "100%" }}
-                        >
-                            <Card.Body>
-                                <div className="supplier-sub-title text-center mt-4 mb-4">
-                                    <p>Sign Up</p>
-                                </div>
-                                <Form className="justify-content-md-center">
+        <Container fluid className="full-height ">
+            <TopNav />
+            <Container className="mt-5">
+                <Row className="full-height justify-content-center">
+                    <Col lg={12} md={12} sm={12} className="p-0 shadow-lg">
+                        <Card className="cardborder p-4 h-100 shadow-lg full-height">
+                            <Card
+                                className="full-height"
+                                style={{ height: "inherit", width: "100%" }}
+                            >
+                                <Card.Header>
+                                    <div className="supplier-sub-title text-center mt-4 mb-4">
+                                        <p>Change Password</p>
+                                    </div>
+                                </Card.Header>
+                                <Card.Body>
 
+                                    <Form style={{ maxwidth: "500px" }} className="text-center" >
+                                        {/* className="" */}
+                                        <Form.Group className="">
 
+                                            <Row className="mb-4 mt-3 justify-content-center ">
+                                                <Col style={{ maxWidth: "400px" }}>
+                                                    <Form.Label>Old Password</Form.Label>
+                                                    <Form.Control
+                                                        type="password"
+                                                        className="supplier-input mb-4"
+                                                        onChange={(e) => setOldPassword(e.target.value)}
+                                                    />
+                                                </Col>
 
-                                    <Row className="mb-4 mt-3">
-                                        <Col sm={12} md={6}>
-                                            <Form.Label>Old Password</Form.Label>
-                                            <Form.Control
-                                                type="password"
-                                                className="supplier-input mb-4"
-                                                onChange={(e) => setOldPassword(e.target.value)}
-                                            />
-                                        </Col>
-                                        <Col sm={12} md={6}>
-                                            <Form.Label>New Password</Form.Label>
-                                            <Form.Control
-                                                type="password"
-                                                className="supplier-input mb-4"
-                                                onChange={(e) => setNewPassword(e.target.value)}
-                                            />
-                                        </Col>
-                                    </Row>
+                                            </Row>
+                                            <Row className="mb-4 mt-3 justify-content-center">
+                                                <Col style={{ maxWidth: "400px" }}>
+                                                    <Form.Label>New Password</Form.Label>
+                                                    <Form.Control
+                                                        type="password"
+                                                        className="supplier-input mb-4"
+                                                        onChange={(e) => setNewPassword(e.target.value)}
+                                                    />
+                                                </Col>
+                                            </Row>
+                                        </Form.Group>
 
+                                    </Form>
                                     <div className="d-flex justify-content-center">
                                         <div className="me-4">
                                             <Button size="lg" className="cancel-supplier-btn">
@@ -101,14 +113,14 @@ const Profile = () => {
                                             </Button>
                                         </div>
                                     </div>
-                                </Form>
-                            </Card.Body>
+                                </Card.Body>
+                            </Card>
                         </Card>
-                    </Card>
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
+            </Container>
         </Container>
     );
 };
 
-export default Profile;
+export default ChangePassword;

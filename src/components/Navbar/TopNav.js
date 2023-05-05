@@ -2,10 +2,30 @@ import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
 import minilogo from '../Images/Group 4.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import AxiosServices from '../Services/AxiosServices';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function TopNav() {
   const [expanded, setExpanded] = useState(false);
-
+  const navigate = useNavigate()
+const handleLogout = ()=>{
+  // axios.get("http://192.168.7.148:8011/user/logout/",{
+  //   headers: {
+  //     Authorization: "Token " + localStorage.getItem("token"),
+  //   }
+  // })
+  AxiosServices.logout().then(res=>{
+    console.log(res.data)
+    toast.success("User Logout Successfully..!", {
+      position: "top-right",
+      theme: "colored",
+    });
+    navigate("/")
+  })
+}
   const toggleNavbar = () => {
     setExpanded(!expanded);
   };
@@ -37,11 +57,12 @@ function TopNav() {
           </NavDropdown>
           <Nav.Link href="/contactus">Contact Us</Nav.Link>
           <Nav.Link href="/feedback">Feedback</Nav.Link>
-          <NavDropdown id="image-dropdown" title={"Admin"}>
-            <NavDropdown.Item href="/newSale">New Sale</NavDropdown.Item>
-            <NavDropdown.Item href="/salesList">Sales List</NavDropdown.Item>
-            <NavDropdown.Item href="/searchByBillno">Search By Bill No</NavDropdown.Item>
+          <NavDropdown id="image-dropdown" title={<FontAwesomeIcon icon={faUser} />}>
+            <NavDropdown.Item href="/changepas">Change Password</NavDropdown.Item>
+            {/* <NavDropdown.Item oncli>Logout</NavDropdown.Item> */}
+            <NavDropdown.Item><p onClick={()=>handleLogout()}>Logout</p></NavDropdown.Item>
           </NavDropdown>
+          <Nav.Link ></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
