@@ -13,6 +13,7 @@ const NewSupplier = () => {
     const [phone, setPhone] = useState();
     const [address, setAddress] = useState("");
     const token = localStorage.getItem("token");
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -23,11 +24,7 @@ const NewSupplier = () => {
             "email": email,
             "gstin": gstin
         }
-        // axios.post("http://192.168.7.148:8011/inventory/supplier/", data, {
-        //     headers: {
-        //         "Authorization": "Token " + token
-        //     }
-        // })
+      
         AxiosServices.addSupplier(data).then(res => {
             console.log(res.status);
             if (res.status === 201) {
@@ -38,8 +35,18 @@ const NewSupplier = () => {
                 })
                 // navigate("/supplierList")
             }
+            // setErrors(res.data);
+            console.log("hii");
 
-        })
+        })       
+        .catch(error => {
+            if (error.response) {
+                setErrors(error.response.data);
+            } else {
+                console.error(error);
+                console.log("HII");
+            }
+        });
         setName("")
         setAddress("")
         setEmail("")
@@ -67,28 +74,45 @@ const NewSupplier = () => {
                     <Row className="mb-3">
                         <Col sm={12} md={6}>
                             <Form.Label>Supplier Name</Form.Label>
-                            <Form.Control type="text" value={name}className='supplier-input' onChange={(e) => setName(e.target.value)} />
+                            <Form.Control type="text" value={name}className='supplier-input' onChange={(e) => {setName(e.target.value)
+                            errors.name = ""
+                            }} />
+                            <p className="form-text text-danger">{errors.name}</p>
                         </Col>
 
                         <Col sm={12} md={6}>
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control type="text" value={phone}className='supplier-input' onChange={(e) => setPhone(e.target.value)} />
+                            <Form.Control type="text" value={phone}className='supplier-input' onChange={(e) => {setPhone(e.target.value)
+                             errors.phone = ""
+                            }} />
+                            <p className="form-text text-danger">{errors.phone}</p>
                         </Col>
+                       
                     </Row>
                     <Row className="mb-3">
                         <Col sm={12} md={6}>
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type="email"value={email} className='supplier-input' onChange={(e) => setEmail(e.target.value)} />
+                            <Form.Control type="email"value={email} className='supplier-input' onChange={(e) => {setEmail(e.target.value)
+                             errors.email = ""
+                            }} />
+                            <p className="form-text text-danger">{errors.email}</p>
                         </Col>
+                       
 
                         <Col sm={12} md={6}>
                             <Form.Label>GSTIN No.</Form.Label>
-                            <Form.Control type="text"value={gstin} className='supplier-input' onChange={(e) => setGstin(e.target.value)} />
+                            <Form.Control type="text"value={gstin} className='supplier-input' onChange={(e) =>{ setGstin(e.target.value)
+                             errors.gstin = ""
+                            }} />
+                            <p className="form-text text-danger">{errors.gstin}</p>
                         </Col>
                     </Row>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Address</Form.Label>
-                        <Form.Control as="textarea"  value={address}rows={3} className='supplier-input' onChange={(e) => setAddress(e.target.value)} />
+                        <Form.Control as="textarea"  value={address}rows={3} className='supplier-input' onChange={(e) => {setAddress(e.target.value)
+                         errors.address = ""
+                        }} />
+                        <p className="form-text text-danger">{errors.address}</p>
                     </Form.Group>
 
                     <div className='d-flex justify-content-center'>

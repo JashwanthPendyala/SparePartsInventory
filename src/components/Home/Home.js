@@ -63,20 +63,24 @@ const Dash = () => {
   };
 
   return (
-    <Container fluid>
+    <Container fluid className='h-100 mb-5'>
       <TopNav />
-      <Container>
+      <Container className='mt-2 mb-5'>
+        <Row>
+          <Col>
+          <h1 className='text-white text-center'> Analytics</h1>
+          </Col>
+        </Row>
         <Row>
           <Col lg={4}>
             <div className="form-group">
-              <label htmlFor="component-select">Select a component:</label>
+              <label htmlFor="component-select">Choose</label>
               <select
                 className="form-control"
                 id="component-select"
                 value={selectedComponent}
                 onChange={handleSelect}
               >
-                <option value="">Choose a component</option>
                 <option value="lowsale">LowSale</option>
                 <option value="highsale">HighSale</option>
                 <option value="leastqty">LeastQty</option>
@@ -84,8 +88,10 @@ const Dash = () => {
             </div>
           </Col>
         </Row>
+        {renderSelectedComponent()}
+        
       </Container>
-      {renderSelectedComponent()}
+      
     </Container>
   );
 };

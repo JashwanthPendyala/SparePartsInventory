@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap';
 
 import Chart from 'chart.js/auto';
 import { CategoryScale } from 'chart.js';
+import AxiosServices from '../Services/AxiosServices';
 
 Chart.register(CategoryScale);
 
@@ -37,12 +38,12 @@ const HighSale = () => {
 
 
     useEffect(() => {
-        axios.get('http://192.168.3.61:8011/transactions/salehigh/',{
-            headers:{
-                Authorization:"Token "+localStorage.getItem("token")
-            }
-        })
-            .then(response => {
+        // axios.get('http://192.168.3.61:8011/transactions/salehigh/',{
+        //     headers:{
+        //         Authorization:"Token "+localStorage.getItem("token")
+        //     }
+        // })
+          AxiosServices.highSale().then(response => {
                 console.log(response.data);
                 setData({
                     labels: response.data.map(item => item.name),

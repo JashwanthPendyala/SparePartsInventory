@@ -43,7 +43,7 @@ const EditSupplier = () => {
     //       },
     //     }
     //   )
-     AxiosServices.editSupplier(data.id).then((res) => {
+     AxiosServices.editSupplier(data.id,data).then((res) => {
         console.log(res.status);
         if (res.status === 200) {
           console.log("status done");
@@ -131,7 +131,7 @@ const EditSupplier = () => {
                 rows={3}
                 className="supplier-input"
                 value={data.address}
-                onChange={(e) => setData({ ...data, name: e.target.value })}
+                onChange={(e) => setData({ ...data, address: e.target.value })}
               />
             </Form.Group>
 

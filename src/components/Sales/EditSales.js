@@ -56,7 +56,7 @@ const EditSales = () => {
                 flag = false;
             }
         })
-        AxiosServices.edittSaleItem(id,saleItem).then(res=>{
+        AxiosServices.editSaleItem(id,saleItem).then(res=>{
             console.log(res.data)
             if(res.status != 200){
                 flag = false;
@@ -67,7 +67,7 @@ const EditSales = () => {
                 position: "top-right",
                 theme: "colored",
               });
-            navigate("/salesList")
+             navigate("/salesList")
         }
     };
 
@@ -76,44 +76,34 @@ const EditSales = () => {
         
         AxiosServices.getStockById(id).then((res) => {
             console.log(res.data);
-            // setPrice(res.data.price);
+           
             setSaleItem({ ...saleItem, perprice: res.data.price, quantity: 0, totalprice: 0 })
         });
     };
 
     const getSaleBill = (billno) => {
         console.log(billno, "Hii");
-        // axios.get("http://192.168.7.148:8011/transactions/saleBill/" + billno, {
-        //     headers: {
-        //         "Authorization": "Token " + token
-        //     }
-        // })
         AxiosServices.getSaleBillByBillNo(billno).then(res => {
             setSaleBill(res.data)
         })
     }
     const calBill = (qty) => {
-        // console.log(buy, " buy");
-        // setBill(price * qty);
+
         setSaleItem({ ...saleItem, totalprice: saleItem.perprice * qty })
     };
     useEffect(() => {
-        //   if(token === ""){
-        //       navigate("/")
-        //   }
-        // axios.get("http://192.168.7.148:8011/inventory/stock/")
+          if(token === ""){
+              navigate("/")
+          }
+       
         
         AxiosServices.getStock().then((res) => {
             setStockList(res.data);
             console.log(res.data);
         });
-        // axios.get("http://192.168.7.148:8011/transactions/saleitem/" + id, {
-        //     headers: {
-        //         "Authorization": "Token " + token
-        //     }
-        // })
         
-       AxiosServices.getSaleItemById().then(res => {
+        
+       AxiosServices.getSaleItemById(id).then(res => {
             console.log(res.data);
             setSaleItem(res.data);
             getSaleBill(res.data.billno);

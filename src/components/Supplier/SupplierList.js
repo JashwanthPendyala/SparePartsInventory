@@ -109,7 +109,7 @@ const SupplierList = () => {
               </tr>
             </thead>
             <tbody>
-              {supplierList.map((map, i) => (
+              {supplierList.slice().reverse().map((map, i) => (
                 <tr key={i}>
                   <td>{i + 1}</td>
                   <td>{map.name}</td>

@@ -64,7 +64,7 @@ function App() {
   //     })
   // }
   return (
-    <div className="App h-100">
+    <div className="App gradient-background h-100">
       {/* <button onClick={(e) => handleSubmit(e)}>Login</button>
       <button onClick={(e) => handleLogout(e)}>Logout</button> */}
 

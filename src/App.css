@@ -6,3 +6,24 @@ body{
     /* background-color: black!important;
     color: white !important; */
 }
+
+/* #root{
+    height: 100%;
+} */
+.gradient-background {
+    background: linear-gradient(300deg,#c69a41,#5cf3f5,#7e8686);
+    background-size: 180% 180%;
+    animation: gradient-animation 18s ease infinite;
+  }
+  
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

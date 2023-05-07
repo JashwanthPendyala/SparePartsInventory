@@ -37,7 +37,7 @@ const LowSale = () => {
 
 
     useEffect(() => {
-        axios.get('http://192.168.3.61:8011/transactions/salelow/',{
+        axios.get('http://192.168.0.8:8011/transactions/salelow/',{
             headers:{
                 Authorization:"Token "+localStorage.getItem("token")
             }
@@ -73,7 +73,7 @@ const LowSale = () => {
 
 
     return (
-        <Container>
+        <Container className='mb-5'>
             <Bar
                 data={data}
                 options={{

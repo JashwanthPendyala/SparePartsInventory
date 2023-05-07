@@ -45,7 +45,7 @@ const Login = () => {
   // };
   // const handleSubmit = (e) => {
   //   e.preventDefault();
-    
+
   //   if (!password && email) {
   //     toast.error("Email and Password is mandatory", {
   //       position: "top-right",
@@ -97,43 +97,36 @@ const Login = () => {
       AxiosServices.login(data).then((res) => {
         console.log(res.data);
         if (res.data.token == undefined) {
-          setEmailError("Invalid credentials");
-          setPasswordError("");
+          toast.error("Invalid credentials", {
+            position: "top-right",
+            theme: "colored",
+          });
         } else {
           localStorage.setItem("token", res.data.token);
-          navigate("/newSale");
+          navigate("/home");
         }
       });
     }
   };
 
-
   const isDesktopResolution = useMatchMedia("(min-width:992px)", true);
   return (
-    <Container fluid className="full-height left-banner-img overflow-container">
+    <div  className="full-height left-banner-img overflow-container">
       <Row className="full-height justify-content-center">
-        {/* {
-                    console.log(size.width)
-                } */}
+        
         {isDesktopResolution && (
-          <Col lg={5} md={12} sm={12} className="left-banner">
+          <Col lg={5} md={12} sm={12} className="left-banner h-100">
             <div className="h-100">
               <img src={logo} className="img-fluid logo p-3" />
               <img src={vehicles} className="w-100" />
             </div>
           </Col>
         )}
-        <Col lg={7} md={12} sm={12} className="p-0 shadow-lg h-100">
+        <Col lg={7} md={12} sm={12} className="p-0 shadow-lg">
           <Card className="cardborder p-3 h-100 shadow-lg full-height">
             <Card className="full-height h-100" style={{ width: "100%" }}>
               <Card.Body className="">
                 <div className="text-center">
-                  {/* <Card.Title className="login-title mb-0">
-                    Spare Part
-                  </Card.Title>
-                  <Card.Text className="login-title-rem mt-0 fs-5">
-                    Inventory
-                  </Card.Text> */}
                   <Card.Img
                     src={minilogo}
                     style={{ width: "258px", height: "93px" }}
@@ -177,7 +170,7 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                     <p className="form-text text-danger">{passwordError}</p>
+                      <p className="form-text text-danger">{passwordError}</p>
                     </Form.Group>
                     <div className="text-center mt-3">
                       <Button
@@ -197,7 +190,6 @@ const Login = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        {" "}
                         Don't Have Account? Create
                       </Link>
                     </Card.Text>
@@ -208,7 +200,7 @@ const Login = () => {
           </Card>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 

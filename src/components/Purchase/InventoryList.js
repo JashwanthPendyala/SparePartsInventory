@@ -20,13 +20,16 @@ import {
 } from "react-bootstrap";
 import TopNav from "../Navbar/TopNav";
 import { Link, useNavigate } from "react-router-dom";
+import AxiosServices from "../Services/AxiosServices";
 
 const InventoryList = () => {
   const [inventoryList, setInventoryList] = useState([]);
   const [supplierName, setSupplierName] = useState("");
   const navigate = useNavigate();
   const getInventoryList = async () => {
-    await axios.get("http://192.168.7.148:8011/inventory/stock/").then((res) => {
+    // await axios.get("http://192.168.7.148:8011/inventory/stock/")
+    
+   await AxiosServices.getStock().then((res) => {
       setInventoryList(res.data);
       console.log(res.data);
     });
@@ -40,18 +43,17 @@ const InventoryList = () => {
   };
   const handleDelete = (e, id) => {
     e.preventDefault();
- alert(id)
     // axios
     //   .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
     //   .then((res) => {
     //     console.log(res.data);
     //     setInventoryList(inventoryList.filter((item) => item.id !== id));
     //   });
-    axios
-  .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
-  .then((res) => {
+  //   axios
+  // .delete("http://192.168.7.148:8011/inventory/stock/" + id + "/")
+  AxiosServices.deleteStock(id).then(res => {
     console.log(res.data);
-    // setInventoryList(inventoryList => inventoryList.filter((item) => item.id !== id));
+    // setInventoryList(inventoryList.filter(item => item.id !== id));
     window.location.reload();
     // getInventoryList();
   })
@@ -109,7 +111,7 @@ const InventoryList = () => {
             </tr>
           </thead>
           <tbody>
-            {inventoryList.map((map, i) => (
+            {inventoryList.slice().reverse().map((map, i) => (
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{map.name}</td>

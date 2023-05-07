@@ -41,7 +41,9 @@ const handleLogout = ()=>{
       {/* <Image src={minilogo} alt="minilogo" height={"90px"} width={"90px"} roundedCircle /> */}
       <Navbar.Toggle onClick={toggleNavbar} aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
+
         <Nav className="justify-content-around w-100">
+        <Nav.Link href="/home">Dashboard</Nav.Link>
           <NavDropdown title="Inventory" id="basic-nav-dropdown">
             <NavDropdown.Item href="/newStock">New Stock</NavDropdown.Item>
             <NavDropdown.Item href="/inventoryList">Inventory List</NavDropdown.Item>
