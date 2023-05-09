@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // import $ from 'jquery'
 import {
   Button,
+  Card,
   Col,
   Container,
   Form,
@@ -120,6 +121,8 @@ const SalesList = () => {
           ))}
         </tbody>
       </table> */}
+      <Card className="bg-light">
+            <Card.Body>
       <table id="example">
         <thead
           style={{
@@ -162,6 +165,8 @@ const SalesList = () => {
           ))}
         </tbody>
       </table>
+      </Card.Body>
+      </Card>
       </Container>
     </Container>
   );

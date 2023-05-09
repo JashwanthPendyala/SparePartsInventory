@@ -191,14 +191,11 @@ const Signup = () => {
     });
   };
   return (
-    <Container fluid className="full-height">
-      <Row className="full-height justify-content-center">
+    <Container className="mt-4 ">
+      <Row className="">
         <Col lg={12} md={12} sm={12} className="p-0 shadow-lg">
-          <Card className="cardborder p-4 h-100 shadow-lg full-height">
-            <Card
-              className="full-height"
-              style={{ height: "inherit", width: "100%" }}
-            >
+          <Card className="cardborder p-4 h-100 shadow-lg bg-light">
+           
               <Card.Body>
                 <div className="supplier-sub-title text-center mt-4 mb-4">
                   <p>Sign Up</p>
@@ -290,7 +287,7 @@ const Signup = () => {
                 </Form>
               </Card.Body>
             </Card>
-          </Card>
+          
         </Col>
       </Row>
     </Container>

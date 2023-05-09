@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
+  Card,
   Col,
   Container,
   Form,
@@ -58,6 +59,8 @@ const Feedback = () => {
         <div className="feedback-sub-title">
           <p>FEEDBACK</p>
         </div>
+        <Card className="bg-light">
+            <Card.Body>
         <Form className="justify-content-md-center">
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>How often do you use our app?</Form.Label>
@@ -110,7 +113,9 @@ const Feedback = () => {
               </Button>
             </div>
           </div>
-        </Form>{" "}
+        </Form>
+        </Card.Body>
+        </Card>
       </Container>
     </Container>
   );

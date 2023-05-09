@@ -76,6 +76,8 @@ const SearchByBill = () => {
                         <p>Search By Bill</p>
                     </div>
                     <div className="d-flex justify-content-center mb-5">
+                        <Card className="bg-light">
+                            <Card.Body>
                         <Form className="">
                             <Row className="mb-3">
                                 <Col>
@@ -94,12 +96,7 @@ const SearchByBill = () => {
 
 
                             <div className="d-flex justify-content-center mt-4">
-                                {/* <div className="me-4">
-                                    <Button size="lg" className="cancel-supplier-btn">
-                                        Cancel
-                                    </Button>
-                                </div> */}
-                                {/* <div className="ms-4"> */}
+                                
                                 <Button
                                     type="submit"
                                     size="lg"
@@ -111,7 +108,8 @@ const SearchByBill = () => {
                                 {/* </div> */}
                             </div>
                         </Form>
-
+                        </Card.Body>
+                        </Card>
                     </div>
                     {
                         visibility && (

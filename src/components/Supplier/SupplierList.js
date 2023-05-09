@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Button,
+  Card,
   Col,
   Container,
   Form,
@@ -32,11 +33,11 @@ const SupplierList = () => {
     //       "Authorization":"Token "+localStorage.getItem("token")
     //     }
     //   })
-      await AxiosServices.getSupplier().then((res) => {
-        setSupplierList(res.data);
-        console.log(res.data);
-      });
-     
+    await AxiosServices.getSupplier().then((res) => {
+      setSupplierList(res.data);
+      console.log(res.data);
+    });
+
     getDataTable();
   };
   const handleEdit = (e, id) => {
@@ -47,15 +48,15 @@ const SupplierList = () => {
     e.preventDefault();
     // axios
     //   .delete("http://192.168.7.148:8011/inventory/supplier/" + id + "/")
-      AxiosServices.deleteSupplier(id).then((res) => {
-        console.log(res.data);
-        toast.success("Deleted Successfully...!",{
-            position: "top-right",
-            theme: "colored"
-        })
-        // setSupplierList(supplierList.filter((item) => item.id !== id));
-        window.location.reload()
+    AxiosServices.deleteSupplier(id).then((res) => {
+      console.log(res.data);
+      toast.success("Deleted Successfully...!", {
+        position: "top-right",
+        theme: "colored",
       });
+      // setSupplierList(supplierList.filter((item) => item.id !== id));
+      window.location.reload();
+    });
   };
   const getDataTable = () => {
     $(document).ready(function () {
@@ -90,43 +91,51 @@ const SupplierList = () => {
               Search
             </InputGroup.Text>
           </InputGroup>
-
-          <table id="example">
-            <thead
-              style={{
-                borderStyle: "none",
-                backgroundColor: "#707070",
-                color: "white",
-              }}
-            >
-              <tr>
-                <th>#</th>
-                <th>Supplier Name</th>
-                <th>Contact</th>
-                <th>GSTIN No</th>
-                <th className="text-center">Edit</th>
-                <th className="text-center">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {supplierList.slice().reverse().map((map, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>{map.name}</td>
-                  <td>{map.phone}</td>
-                  <td>{map.gstin}</td>
-                  <td>
-                    <Button onClick={(e) => handleEdit(e, map.id)}>Edit</Button>
-                  </td>
-                  <td>
-                    <Button onClick={(e) => handleDelete(e, map.id)}>
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Card className="bg-light">
+            <Card.Body>
+              <table id="example">
+                <thead
+                  style={{
+                    borderStyle: "none",
+                    backgroundColor: "#707070",
+                    color: "white",
+                  }}
+                >
+                  <tr>
+                    <th>#</th>
+                    <th>Supplier Name</th>
+                    <th>Contact</th>
+                    <th>GSTIN No</th>
+                    <th className="text-center">Edit</th>
+                    <th className="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {supplierList
+                    .slice()
+                    .reverse()
+                    .map((map, i) => (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{map.name}</td>
+                        <td>{map.phone}</td>
+                        <td>{map.gstin}</td>
+                        <td>
+                          <Button onClick={(e) => handleEdit(e, map.id)}>
+                            Edit
+                          </Button>
+                        </td>
+                        <td>
+                          <Button onClick={(e) => handleDelete(e, map.id)}>
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </Card.Body>
+          </Card>
         </div>
       </Container>
     </Container>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
+  Card,
   Col,
   Container,
   Form,
@@ -73,6 +74,8 @@ const EditStock = () => {
           <div className="supplier-sub-title">
             <p>Edit Stock</p>
           </div>
+          <Card className="bg-light">
+            <Card.Body>
           <Form className="justify-content-md-center">
             <Row className="mb-3">
               <Col sm={12} md={6}>
@@ -154,6 +157,8 @@ const EditStock = () => {
               </div>
             </div>
           </Form>
+          </Card.Body>
+          </Card>
         </div>
       </Container>
     </Container>

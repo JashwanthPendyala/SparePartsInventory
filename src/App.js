@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
-
 import SupplierList from "./components/Supplier/SupplierList";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +15,6 @@ import Signup from "./components/Signup/Signup";
 import TopNav from "./components/Navbar/TopNav";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Feedback from "./components/Feedback/Feedback";
-
 import EditStock from "./components/Purchase/EditStock";
 import EditSales from "./components/Sales/EditSales";
 import EditSupplier from "./components/Supplier/EditSupplier";
@@ -24,6 +22,7 @@ import Graph from "./components/Graph/Graph";
 import SearchByBill from "./components/Sales/SearchByBill";
 import Dash from "./components/Home/Home";
 import ChangePassword from "./components/Profile/ChangePassword";
+
 
 function App() {
   // const [token, setToken] = useState("")
@@ -64,7 +63,7 @@ function App() {
   //     })
   // }
   return (
-    <div className="App gradient-background h-100">
+    <div className="App gradient-background">
       {/* <button onClick={(e) => handleSubmit(e)}>Login</button>
       <button onClick={(e) => handleLogout(e)}>Logout</button> */}
 
