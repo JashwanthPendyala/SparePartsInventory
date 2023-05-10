@@ -74,7 +74,7 @@ const LeastQty = () => {
 
 
     return (
-        <Container>
+        <Container className='mb-5'>
             <Bar
                 data={data}
                 options={{

@@ -9,6 +9,7 @@ import "/node_modules/datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import {
   Button,
+  Card,
   Col,
   Container,
   Form,
@@ -73,24 +74,26 @@ const InventoryList = () => {
     <Container fluid>
       <TopNav />
       <Container>
-        <div className="mt-3 supplier-list-title">Inventory List</div>
+        <div className="mt-3 supplier-list-title">Inventory</div>
         <hr />
         <div className="d-flex justify-content-between">
           <div className="supplier-list-subtitle">
-            <p>Inventory List</p>
+            <p>Available Products List</p>
           </div>
           <div className="addStockBtn">
             <Link to="/newStock">
-              <Button className="addNewStockBtn fs-5">Add New Stock</Button>
+              <Button className="addNewStockBtn fs-5">Add New Product</Button>
             </Link>
           </div>
         </div>
-        <InputGroup className="mb-3 mt-4">
+        {/* <InputGroup className="mb-3 mt-4">
           <Form.Control placeholder="Search By Supplier Name" />
           <InputGroup.Text id="basic-addon2" className="searchSupplier">
             Search
           </InputGroup.Text>
-        </InputGroup>
+        </InputGroup> */}
+        <Card className="bg-light">
+            <Card.Body>
 
         <table id="example">
           <thead
@@ -130,6 +133,8 @@ const InventoryList = () => {
             ))}
           </tbody>
         </table>
+        </Card.Body>
+        </Card>
       </Container>
     </Container>
   );

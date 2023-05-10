@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
+  Card,
   Col,
   Container,
   Form,
@@ -216,12 +217,14 @@ const NewSale = () => {
       <Container>
         <div className="mt-3">
           <div className="supplier-title">
-            <p>New Sale</p>
+            <p>Sales</p>
           </div>
           <hr />
           <div className="supplier-sub-title">
-            <p>Customer DETAILS</p>
+            <p>Add New Sales</p>
           </div>
+          <Card className="bg-light">
+            <Card.Body>
           <Form className="justify-content-md-center">
             <Row className="mb-3">
               <Col sm={12} md={6}>
@@ -305,7 +308,7 @@ const NewSale = () => {
             </Form.Group>
 
             <div className="supplier-sub-title">
-              <p>Product DETAILS</p>
+              <p>Product Details</p>
             </div>
             <Row>
               <Col>
@@ -397,6 +400,8 @@ const NewSale = () => {
               </div>
             </div>
           </Form>
+          </Card.Body>
+          </Card>
         </div>
       </Container>
     </Container>

@@ -10,7 +10,7 @@ body{
 /* #root{
     height: 100%;
 } */
-.gradient-background {
+/* .gradient-background {
     background: linear-gradient(300deg,#c69a41,#5cf3f5,#7e8686);
     background-size: 180% 180%;
     animation: gradient-animation 18s ease infinite;
@@ -26,4 +26,8 @@ body{
     100% {
       background-position: 0% 50%;
     }
-  }
+  } */
+
+  .dataTables_filter label {
+    margin: 10px;
+   }

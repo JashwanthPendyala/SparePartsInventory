@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://192.168.0.8:8011";
+const url = "http://192.168.3.61:8011";
 let token = localStorage.getItem("token");
 const headers = {
   Authorization: "Token " + token,
