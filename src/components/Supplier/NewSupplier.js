@@ -72,11 +72,11 @@ const NewSupplier = () => {
       <Container>
         <div className="mt-3">
           <div className="supplier-title">
-            <p>New Supplier</p>
+            <p>Supplier</p>
           </div>
           <hr />
           <div className="supplier-sub-title">
-            <p>SUPPLIER DETAILS</p>
+            <p>Add New Supplier</p>
           </div>
           <Card className="bg-light">
             <Card.Body>
@@ -169,7 +169,7 @@ const NewSupplier = () => {
                       className="add-supplier-btn"
                       onClick={(e) => handleSubmit(e)}
                     >
-                      Add Supplier
+                      Add 
                     </Button>
                   </div>
                 </div>

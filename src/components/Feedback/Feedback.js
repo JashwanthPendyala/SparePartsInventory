@@ -56,9 +56,9 @@ const Feedback = () => {
           <p>Feedback</p>
         </div>
         <hr />
-        <div className="feedback-sub-title">
+        {/* <div className="feedback-sub-title">
           <p>FEEDBACK</p>
-        </div>
+        </div> */}
         <Card className="bg-light">
             <Card.Body>
         <Form className="justify-content-md-center">

@@ -65,11 +65,11 @@ const SalesList = () => {
     <Container fluid>
       <TopNav />
       <Container>
-      <div className="mt-3 supplier-list-title">Sales List</div>
+      <div className="mt-3 supplier-list-title">Sales</div>
       <hr />
       <div className="d-flex justify-content-between">
         <div className="supplier-list-subtitle">
-          <p>Sales List</p>
+          <p>Sales Details</p>
         </div>
         <div className="addStockBtn">
           <Link to={'/newSale'}><Button className="addNewStockBtn fs-5">Add New Sales</Button></Link>

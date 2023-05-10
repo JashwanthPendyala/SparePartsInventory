@@ -71,11 +71,11 @@ const SupplierList = () => {
       <TopNav />
       <Container>
         <div className="mt-3">
-          <div className="supplier-list-title">Supplier List</div>
+          <div className="supplier-list-title">Supplier</div>
           <hr />
           <div className="d-flex justify-content-between">
             <div className="supplier-list-subtitle">
-              <p>Supplier List</p>
+              <p>Available Suppliers</p>
             </div>
             <div className="addStockBtn">
               <Link to={"/newSupplier"}>
@@ -85,12 +85,12 @@ const SupplierList = () => {
               </Link>
             </div>
           </div>
-          <InputGroup className="mb-3 mt-4">
+          {/* <InputGroup className="mb-3 mt-4">
             <Form.Control placeholder="Search By Supplier Name" />
             <InputGroup.Text id="basic-addon2" className="searchSupplier">
               Search
             </InputGroup.Text>
-          </InputGroup>
+          </InputGroup> */}
           <Card className="bg-light">
             <Card.Body>
               <table id="example">

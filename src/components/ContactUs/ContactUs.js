@@ -55,9 +55,9 @@ const ContactUs = () => {
           <p>Contact us</p>
         </div>
         <hr />
-        <div className="Contact-sub-title">
+        {/* <div className="Contact-sub-title">
           <p>CONTACT US</p>
-        </div>
+        </div> */}
         <Card className="bg-light">
         <Card.Body>
         <Form className="justify-content-md-center">

@@ -63,7 +63,7 @@ function TopNav() {
               Supplier List
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="Transactions" id="basic-nav-dropdown"  className="custom-dropdown">
+          <NavDropdown title="Sales" id="basic-nav-dropdown"  className="custom-dropdown">
             <NavDropdown.Item href="/newSale">New Sale</NavDropdown.Item>
             <NavDropdown.Item href="/salesList">Sales List</NavDropdown.Item>
             <NavDropdown.Item href="/searchByBillno">

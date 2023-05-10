@@ -74,15 +74,15 @@ const InventoryList = () => {
     <Container fluid>
       <TopNav />
       <Container>
-        <div className="mt-3 supplier-list-title">Inventory List</div>
+        <div className="mt-3 supplier-list-title">Inventory</div>
         <hr />
         <div className="d-flex justify-content-between">
           <div className="supplier-list-subtitle">
-            <p>Inventory List</p>
+            <p>Available Products List</p>
           </div>
           <div className="addStockBtn">
             <Link to="/newStock">
-              <Button className="addNewStockBtn fs-5">Add New Stock</Button>
+              <Button className="addNewStockBtn fs-5">Add New Product</Button>
             </Link>
           </div>
         </div>

@@ -69,12 +69,12 @@ const SearchByBill = () => {
             <Container>
                 <div className="mt-3">
                     <div className="supplier-title">
-                        <p>Search By Bill</p>
+                        <p>Search By Bill Number</p>
                     </div>
                     <hr />
-                    <div className="supplier-sub-title">
+                    {/* <div className="supplier-sub-title">
                         <p>Search By Bill</p>
-                    </div>
+                    </div> */}
                     <div className="d-flex justify-content-center mb-5">
                         <Card className="bg-light">
                             <Card.Body>

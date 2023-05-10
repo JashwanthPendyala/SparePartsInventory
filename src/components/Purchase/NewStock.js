@@ -125,11 +125,11 @@ const NewStock = () => {
       <Container>
         <div className="mt-3">
           <div className="supplier-title">
-            <p>New Stock</p>
+            <p>Stock</p>
           </div>
           <hr />
           <div className="supplier-sub-title">
-            <p>New Stock</p>
+            <p>Add New Product</p>
           </div>
           <Card className="bg-light">
             <Card.Body>
